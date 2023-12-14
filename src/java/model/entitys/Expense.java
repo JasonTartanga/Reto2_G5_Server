@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entitys;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,6 +34,17 @@ public class Expense implements Serializable {
     private LocalDate date;
 
     private String iban;
+
+    @OneToMany(mappedBy = "Expense")
+    private List<BankAccount> BankAccount;
+
+    public List<BankAccount> getBankAccount() {
+        return BankAccount;
+    }
+
+    public void setBankAccount(List<BankAccount> BankAccount) {
+        this.BankAccount = BankAccount;
+    }
 
     public String getUuid() {
         return uuid;
@@ -83,6 +92,13 @@ public class Expense implements Serializable {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (uuid != null ? uuid.hashCode() : 0);
+        return hash;
     }
 
     @Override

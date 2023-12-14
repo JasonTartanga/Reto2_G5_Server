@@ -17,7 +17,6 @@ import javax.persistence.Table;
  * @author Ian.
  */
 @Entity
-@DiscriminatorValue("Punctual")
 public class Punctual extends Expense implements Serializable {
 
     private static final long serialVersionUID = 11L;
