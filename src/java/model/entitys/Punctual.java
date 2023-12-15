@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entitys;
 
 import java.io.Serializable;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 
 /**
  *
@@ -21,13 +14,16 @@ public class Punctual extends Expense implements Serializable {
 
     private static final long serialVersionUID = 11L;
 
-    @Enumerated(EnumType.ORDINAL)
+    //******************** ATRIBUTOS *********************/
+    @Enumerated(EnumType.STRING)
     private Importance importance;
 
+    //******************** CONSTRUCTOR *********************/
     public Punctual() {
         super();
     }
 
+    //******************** GETTERS && SETTERS *********************/
     public Importance getImportance() {
         return importance;
     }
@@ -36,6 +32,7 @@ public class Punctual extends Expense implements Serializable {
         this.importance = importance;
     }
 
+    //******************** METODOS *********************/
     @Override
     public String toString() {
         return "Punctual{" + "importance=" + importance + '}';

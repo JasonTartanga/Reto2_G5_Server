@@ -5,9 +5,12 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,35 +25,24 @@ public class Expense implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    //******************** ATRIBUTOS *********************/
     @Id
-    private String uuid;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long uuid;
     private String name;
-
     private String concept;
-
     private float amount;
-
     private LocalDate date;
 
-    private String iban;
+    @ManyToOne
+    private Group group;
 
-    @OneToMany(mappedBy = "Expense")
-    private List<BankAccount> BankAccount;
-
-    public List<BankAccount> getBankAccount() {
-        return BankAccount;
-    }
-
-    public void setBankAccount(List<BankAccount> BankAccount) {
-        this.BankAccount = BankAccount;
-    }
-
-    public String getUuid() {
+    //******************** GETTERS && SETTERS *********************/
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 
@@ -86,14 +78,15 @@ public class Expense implements Serializable {
         this.date = date;
     }
 
-    public String getIban() {
-        return iban;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setIban(String iban) {
-        this.iban = iban;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
+//******************** METODOS *********************/
     @Override
     public int hashCode() {
         int hash = 0;
@@ -116,7 +109,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        return "Expense{" + "uuid=" + uuid + '}';
+        return "Expense{" + "uuid=" + uuid + ", name=" + name + ", concept=" + concept + ", amount=" + amount + ", date=" + date + ", group=" + group + '}';
     }
 
 }
