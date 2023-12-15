@@ -2,8 +2,6 @@ package model.entitys;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -21,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Expense", schema = "CashTracker")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@XmlRootElement
 public class Expense implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +31,8 @@ public class Expense implements Serializable {
     private String name;
     private String concept;
     private float amount;
+    private float totalPuntual;
+    private float totalRecurrente;
     private LocalDate date;
 
     @ManyToOne
@@ -86,7 +87,23 @@ public class Expense implements Serializable {
         this.group = group;
     }
 
-//******************** METODOS *********************/
+    public float getTotalPuntual() {
+        return totalPuntual;
+    }
+
+    public void setTotalPuntual(float totalPuntual) {
+        this.totalPuntual = totalPuntual;
+    }
+
+    public float getTotalRecurrente() {
+        return totalRecurrente;
+    }
+
+    public void setTotalRecurrente(float totalRecurrente) {
+        this.totalRecurrente = totalRecurrente;
+    }
+
+    //******************** METODOS *********************/
     @Override
     public int hashCode() {
         int hash = 0;

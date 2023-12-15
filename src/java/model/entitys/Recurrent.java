@@ -4,12 +4,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Jason.
  */
 @Entity
+@XmlRootElement
 public class Recurrent extends Expense implements Serializable {
 
     private static final long serialVersionUID = 11L;

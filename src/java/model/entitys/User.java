@@ -9,12 +9,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Jason.
  */
 @Entity
 @Table(name = "User", schema = "CashTraker")
+@XmlRootElement
 public class User implements Serializable {
 
     private static final long serialVersionUID = 11L;
@@ -91,6 +94,7 @@ public class User implements Serializable {
         this.privileges = privileges;
     }
 
+    //@XmlTransient
     public List<Shared> getShared() {
         return shared;
     }

@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.MERGE;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,6 +37,7 @@ import javax.persistence.TemporalType;
      @NamedQuery(
             name = "viewByPlan", query = "SELECT G FROM Group G where G.plan=:plan"
     ),})
+@XmlRootElement
 public class Group implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -120,6 +121,7 @@ public class Group implements Serializable {
         this.plan = plan;
     }
 
+    @XmlTransient
     public List<Shared> getAsociated() {
         return asociated;
     }
@@ -128,6 +130,7 @@ public class Group implements Serializable {
         this.asociated = asociated;
     }
 
+    @XmlTransient
     public List<Expense> getExpenses() {
         return expenses;
     }

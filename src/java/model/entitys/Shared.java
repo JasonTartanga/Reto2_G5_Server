@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Shared", schema = "CashTraker")
+@XmlRootElement
 public class Shared implements Serializable {
 
     private static final long serialVersionUID = 1L;
