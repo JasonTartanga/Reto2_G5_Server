@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +19,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "User", schema = "CashTracker")
+@NamedQuery(
+        name = "viewAllUsers", query = "SELECT U FROM User U"
+)
 @XmlRootElement
 public class User implements Serializable {
 

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +23,59 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Expense", schema = "CashTracker")
+@NamedQueries({
+    @NamedQuery(
+            name = "viewAllExpenses", query = "SELECT E FROM Expense E"
+    )
+    ,
+    @NamedQuery(
+            name = "viewAllExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllRecurrents", query = "SELECT E FROM Expense E WHERE periodicity is not null"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllPunctual", query = "SELECT E FROM Expense E WHERE importance is not null AND E.account.id = :id"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllRecurrentsByAccount", query = "SELECT E FROM Expense E WHERE periodicity is not null AND E.account.id = :id"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllPunctualByAccount", query = "SELECT E FROM Expense E WHERE importance is not null"
+    )
+    ,
+    @NamedQuery(
+            name = "searchExpensesByName", query = "SELECT E FROM Expense E WHERE name like :name"
+    )
+    ,
+    @NamedQuery(
+            name = "searchExpensesByConcept", query = "SELECT E FROM Expense E WHERE concept like :concept"
+    )
+    ,
+    @NamedQuery(
+            name = "searchExpensesWithHigherAmount", query = "SELECT E FROM Expense E WHERE amount >= :amount"
+    )
+    ,
+    @NamedQuery(
+            name = "searchExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE amount <= :amount"
+    )
+    ,
+    @NamedQuery(
+            name = "searchRecurrentByPeriodicity", query = "SELECT E FROM Expense E WHERE periodicity = :periodicity"
+    )
+    ,
+    @NamedQuery(
+            name = "searchRecurrentByCategory", query = "SELECT E FROM Expense E WHERE category = :category"
+    )
+    ,
+    @NamedQuery(
+            name = "searchPunctualByImportance", query = "SELECT E FROM Expense E WHERE importance = :importance"
+    ),
+})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class Expense implements Serializable {
