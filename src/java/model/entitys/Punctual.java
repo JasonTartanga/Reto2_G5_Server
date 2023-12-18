@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ian.
  */
 @Entity
-@DiscriminatorValue("P")
+@DiscriminatorValue("Punctual")
 @XmlRootElement
 public class Punctual extends Expense implements Serializable {
 

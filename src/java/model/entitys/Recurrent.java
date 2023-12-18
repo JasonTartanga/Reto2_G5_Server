@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jason.
  */
 @Entity
-@DiscriminatorValue("R")
+@DiscriminatorValue("Recurrent")
 @XmlRootElement
 public class Recurrent extends Expense implements Serializable {
 

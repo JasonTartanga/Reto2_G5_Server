@@ -2,6 +2,7 @@ package model.entitys;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,7 +36,9 @@ public class Expense implements Serializable {
     private float amount;
     private float totalPuntual;
     private float totalRecurrente;
-    private LocalDate date;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @ManyToOne
     private Account account;
@@ -71,11 +76,11 @@ public class Expense implements Serializable {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
