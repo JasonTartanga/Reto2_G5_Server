@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jason.
  */
 @Entity
-@Table(name = "Shared", schema = "CashTraker")
+@Table(name = "Shared", schema = "CashTracker")
 @XmlRootElement
 public class Shared implements Serializable {
 

@@ -11,15 +11,15 @@ import javax.persistence.Embeddable;
 public class SharedId implements Serializable {
 
     //******************** ATRIBUTOS *********************/
-    private String id;
+    private Long id;
     private String mail;
 
     //******************** GETTERS && SETTERS *********************/
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

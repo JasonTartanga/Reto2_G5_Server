@@ -10,8 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -49,7 +47,7 @@ public class Account implements Serializable {
     @OneToMany(cascade = ALL, mappedBy = "account")
     private List<Shared> shared;
 
-    @OneToMany(cascade = ALL, mappedBy = "expense")
+    @OneToMany(cascade = ALL, mappedBy = "account")
     private List<Expense> expenses;
 
     //******************** GETTERS && SETTERS *********************/

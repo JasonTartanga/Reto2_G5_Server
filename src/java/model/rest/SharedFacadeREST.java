@@ -40,7 +40,7 @@ public class SharedFacadeREST extends AbstractFacade<Shared> {
         javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
         java.util.List<String> id = map.get("id");
         if (id != null && !id.isEmpty()) {
-            key.setId(id.get(0));
+            key.setId(new java.lang.Long(id.get(0)));
         }
         java.util.List<String> mail = map.get("mail");
         if (mail != null && !mail.isEmpty()) {
