@@ -27,7 +27,7 @@ public class Shared implements Serializable {
 
     @MapsId("id")
     @ManyToOne
-    private Group group;
+    private Account account;
 
     @MapsId("mail")
     @ManyToOne
@@ -45,12 +45,12 @@ public class Shared implements Serializable {
         this.idShared = idShared;
     }
 
-    public Group getBankAccount() {
-        return group;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setBankAccount(Group group) {
-        this.group = group;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public User getUser() {

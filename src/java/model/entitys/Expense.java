@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Expense", schema = "CashTracker")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class Expense implements Serializable {
 
@@ -36,7 +36,7 @@ public class Expense implements Serializable {
     private LocalDate date;
 
     @ManyToOne
-    private Group group;
+    private Account account;
 
     //******************** GETTERS && SETTERS *********************/
     public Long getUuid() {
@@ -79,12 +79,12 @@ public class Expense implements Serializable {
         this.date = date;
     }
 
-    public Group getGroup() {
-        return group;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setAccount(Account group) {
+        this.account = group;
     }
 
     public float getTotalPuntual() {
@@ -126,7 +126,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        return "Expense{" + "uuid=" + uuid + ", name=" + name + ", concept=" + concept + ", amount=" + amount + ", date=" + date + ", group=" + group + '}';
+        return "Expense{" + "uuid=" + uuid + ", name=" + name + ", concept=" + concept + ", amount=" + amount + ", totalPuntual=" + totalPuntual + ", totalRecurrente=" + totalRecurrente + ", date=" + date + ", account=" + account + '}';
     }
 
 }

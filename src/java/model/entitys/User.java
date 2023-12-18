@@ -95,6 +95,7 @@ public class User implements Serializable {
     }
 
     //@XmlTransient
+    @XmlTransient
     public List<Shared> getShared() {
         return shared;
     }

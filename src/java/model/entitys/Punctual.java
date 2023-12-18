@@ -1,6 +1,7 @@
 package model.entitys;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ian.
  */
 @Entity
+@DiscriminatorValue("R")
 @XmlRootElement
 public class Punctual extends Expense implements Serializable {
 

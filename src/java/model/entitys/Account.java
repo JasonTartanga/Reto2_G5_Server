@@ -24,21 +24,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jessica.
  */
 @Entity
-@Table(name = "Group", schema = "CashTracker")
-
-@NamedQueries({
-    @NamedQuery(
-            name = "viewAllGroups", query = "SELECT G FROM Group G"
-    )
-    ,@NamedQuery(
-            name = "viewAllGroupsByUser", query = "SELECT G FROM Group G join Shared S on G.id=S.id WHERE S.mail=:mail"
-    )
-    ,
-     @NamedQuery(
-            name = "viewByPlan", query = "SELECT G FROM Group G where G.plan=:plan"
-    ),})
+@Table(name = "Account", schema = "CashTracker")
 @XmlRootElement
-public class Group implements Serializable {
+public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,10 +46,10 @@ public class Group implements Serializable {
     @Enumerated(EnumType.STRING)
     private Plan plan;
 
-    @OneToMany(cascade = ALL, mappedBy = "group")
-    private List<Shared> asociated;
+    @OneToMany(cascade = ALL, mappedBy = "account")
+    private List<Shared> shared;
 
-    @OneToMany(cascade = ALL, mappedBy = "group")
+    @OneToMany(cascade = ALL, mappedBy = "expense")
     private List<Expense> expenses;
 
     //******************** GETTERS && SETTERS *********************/
@@ -122,12 +110,12 @@ public class Group implements Serializable {
     }
 
     @XmlTransient
-    public List<Shared> getAsociated() {
-        return asociated;
+    public List<Shared> getShared() {
+        return shared;
     }
 
-    public void setAsociated(List<Shared> asociated) {
-        this.asociated = asociated;
+    public void setShared(List<Shared> shared) {
+        this.shared = shared;
     }
 
     @XmlTransient
@@ -150,10 +138,10 @@ public class Group implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Group)) {
+        if (!(object instanceof Account)) {
             return false;
         }
-        Group other = (Group) object;
+        Account other = (Account) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -162,7 +150,7 @@ public class Group implements Serializable {
 
     @Override
     public String toString() {
-        return "Group{" + "id=" + id + ", nombre=" + nombre + ", description=" + description + ", divisa=" + divisa + ", balance=" + balance + ", date=" + date + ", plan=" + plan + ", asociated=" + asociated + ", expenses=" + expenses + '}';
+        return "Account{" + "id=" + id + ", nombre=" + nombre + ", description=" + description + ", divisa=" + divisa + ", balance=" + balance + ", date=" + date + ", plan=" + plan + ", shared=" + shared + ", expenses=" + expenses + '}';
     }
 
 }
