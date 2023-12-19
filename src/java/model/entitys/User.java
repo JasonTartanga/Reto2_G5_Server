@@ -19,9 +19,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "User", schema = "CashTracker")
-@NamedQuery(
-        name = "viewAllUsers", query = "SELECT U FROM User U"
-)
+@NamedQueries({
+    @NamedQuery(
+            name = "viewAllUsers", query = "SELECT U FROM User U"
+    )
+    ,
+    @NamedQuery(
+            name = "loginUser", query = "SELECT U FROM User U WHERE mail = :mail AND password = :password"
+    ),})
 @XmlRootElement
 public class User implements Serializable {
 

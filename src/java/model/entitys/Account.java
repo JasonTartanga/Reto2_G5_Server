@@ -30,28 +30,29 @@ import javax.xml.bind.annotation.XmlTransient;
             name = "viewAllAccounts", query = "SELECT A FROM Account A"
     )
     ,
-    @NamedQuery(
-            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN Shared S ON A.id = S.account_id WHERE S.user_mail = :mail"
+  /*  @NamedQuery(
+            //  name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN Shared S ON A.id = S.account_id WHERE S.user_mail = :mail"
+            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A WHERE A.shared.user.mail = :mail"
+    )
+    ,
+  */  @NamedQuery(
+            name = "filterAccountsByName", query = "SELECT A FROM Account A WHERE A.name like :name"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsByName", query = "SELECT A FROM Account A WHERE name like :name"
+            name = "filterAccountsByDescription", query = "SELECT A FROM Account A WHERE A.description like :description"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsByDescription", query = "SELECT A FROM Account A WHERE description like :description"
+            name = "filterAccountsWithHigherBalance", query = "SELECT A FROM Account A WHERE A.balance >= :balance"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsWithHigherBalance", query = "SELECT A FROM Account A WHERE balance >= :balance"
+            name = "filterAccountsWithLowerBalance", query = "SELECT A FROM Account A WHERE A.balance <= :balance"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsWithLowerBalance", query = "SELECT A FROM Account A WHERE balance <= :balance"
-    )
-    ,
-    @NamedQuery(
-            name = "filterAccountsByDivisa", query = "SELECT A FROM Account A WHERE divisa = :divisa"
+            name = "filterAccountsByDivisa", query = "SELECT A FROM Account A WHERE A.divisa = :divisa"
     ),})
 @XmlRootElement
 public class Account implements Serializable {

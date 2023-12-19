@@ -1,6 +1,7 @@
 package model.interfaces;
 
 import exceptions.CreateException;
+import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
@@ -8,7 +9,7 @@ import model.entitys.Account;
 
 /**
  *
- * @author Jason.
+ * @author Jessica.
  */
 public interface AccountInterface {
 
@@ -16,7 +17,7 @@ public interface AccountInterface {
 
     public void updateAccount(Account account) throws UpdateException;
 
-    public void deleteAccount(Account account) throws SelectException;
+    public void deleteAccount(Account account) throws DeleteException;
 
     public List<Account> viewAllAccounts() throws SelectException;
 

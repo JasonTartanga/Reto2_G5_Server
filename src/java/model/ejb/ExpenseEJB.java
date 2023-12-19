@@ -7,6 +7,7 @@ import exceptions.UpdateException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import model.entitys.Account;
 import model.entitys.Category;
 import model.entitys.Expense;
 import model.entitys.Importance;
@@ -54,147 +55,158 @@ public class ExpenseEJB implements ExpenseInterface {
 
     @Override
     public List<Expense> findAllExpenses() throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
+            expenses
                     = em.createNamedQuery("findAllExpenses").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> searchAllExpensesByAccount(String id) throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
+            expenses
                     = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> listAllRecurrents() throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
+            expenses
                     = em.createNamedQuery("listAllRecurrents").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> listAllPunctual() throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
+            expenses
                     = em.createNamedQuery("listAllPunctual").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> searchAllRecurrentsByAccount(String id) throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("searchAllRecurrentsByAccount").setParameter("id", id).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
+    }
+
+    @Override
+    public List<Expense> searchAllPunctualByAccount(String id) throws SelectException {
+        List<Expense> expenses = null;
+        try {
+            expenses
+                    = em.createNamedQuery("searchAllPunctualByAccount").setParameter("id", id).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return expenses;
     }
 
     @Override
     public List<Expense> filterExpensesByName(String name) throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterExpensesByName").setParameter("name", name).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> filterExpensesByConcept(String concept) throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterExpensesByConcept").setParameter("concept", concept).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
     public List<Expense> filterExpensesWithHigherAmount(String amount) throws SelectException {
-        List<Expense> expense = null;
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterExpensesWithHigherAmount").setParameter("amount", amount).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;
+        return expenses;
     }
 
     @Override
-    List<Expense> expense = null;
-
-
+    public List<Expense> filterExpensesWithLowerAmount(String amount) throws SelectException {
+        List<Expense> expenses = null;
         try {
-            expense
-                = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
-    }
-    catch (Exception e
-
-
-        ) {
-            throw new SelectException(e.getMessage());
-    }
-    return expense ;
-}
-
-@Override
-   List<Expense> expense = null;
-        try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterExpensesWithLowerAmount").setParameter("amount", amount).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;}
+        return expenses;
+    }
 
     @Override
-        public List<Expense> filterRecurrentByCategory(Category category) throws SelectException {
-     List<Expense> expense = null;
+    public List<Expense> filterRecurrentByPeriodicity(Period periodicity) throws SelectException {
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterRecurrentByPeriodicity").setParameter("periodicity", periodicity).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense;}
+        return expenses;
+    }
 
     @Override
-        public List<Expense> filterPunctualByImportance(Importance importance) throws SelectException {
-   List<Expense> expense = null;
+    public List<Expense> filterRecurrentByCategory(Category category) throws SelectException {
+        List<Expense> expenses = null;
         try {
-            expense
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
+            expenses
+                    = em.createNamedQuery("filterRecurrentByCategory").setParameter("category", category).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expense; }
+        return expenses;
+    }
+
+    @Override
+    public List<Expense> filterPunctualByImportance(Importance importance) throws SelectException {
+        List<Expense> expenses = null;
+        try {
+            expenses
+                    = em.createNamedQuery("filterPunctualByImportance").setParameter("importance", importance).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return expenses;
+    }
 
 }

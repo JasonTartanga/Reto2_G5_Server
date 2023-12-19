@@ -1,7 +1,6 @@
 package model.entitys;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,47 +32,47 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "listAllRecurrents", query = "SELECT E FROM Expense E WHERE periodicity is not null"
+            name = "listAllRecurrents", query = "SELECT E FROM Expense E WHERE E.periodicity is not null"
     )
     ,
     @NamedQuery(
-            name = "listAllPunctual", query = "SELECT E FROM Expense E WHERE importance is not null AND E.account.id = :id"
+            name = "listAllPunctual", query = "SELECT E FROM Expense E WHERE E.importance is not null AND E.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "searchAllRecurrentsByAccount", query = "SELECT E FROM Expense E WHERE periodicity is not null AND E.account.id = :id"
+            name = "searchAllRecurrentsByAccount", query = "SELECT E FROM Expense E WHERE E.periodicity is not null AND E.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "searchAllPunctualByAccount", query = "SELECT E FROM Expense E WHERE importance is not null"
+            name = "searchAllPunctualByAccount", query = "SELECT E FROM Expense E WHERE E.importance is not null"
     )
     ,
     @NamedQuery(
-            name = "filterExpensesByName", query = "SELECT E FROM Expense E WHERE name like :name"
+            name = "filterExpensesByName", query = "SELECT E FROM Expense E WHERE E.name like :name"
     )
     ,
     @NamedQuery(
-            name = "filterExpensesByConcept", query = "SELECT E FROM Expense E WHERE concept like :concept"
+            name = "filterExpensesByConcept", query = "SELECT E FROM Expense E WHERE E.concept like :concept"
     )
     ,
     @NamedQuery(
-            name = "filterExpensesWithHigherAmount", query = "SELECT E FROM Expense E WHERE amount >= :amount"
+            name = "filterExpensesWithHigherAmount", query = "SELECT E FROM Expense E WHERE E.amount >= :amount"
     )
     ,
     @NamedQuery(
-            name = "filterExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE amount <= :amount"
+            name = "filterExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE E.amount <= :amount"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentByPeriodicity", query = "SELECT E FROM Expense E WHERE periodicity = :periodicity"
+            name = "filterRecurrentByPeriodicity", query = "SELECT E FROM Expense E WHERE E.periodicity = :periodicity"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentByCategory", query = "SELECT E FROM Expense E WHERE category = :category"
+            name = "filterRecurrentByCategory", query = "SELECT E FROM Expense E WHERE E.category = :category"
     )
     ,
     @NamedQuery(
-            name = "filterPunctualByImportance", query = "SELECT E FROM Expense E WHERE importance = :importance"
+            name = "filterPunctualByImportance", query = "SELECT E FROM Expense E WHERE E.importance = :importance"
     ),})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
