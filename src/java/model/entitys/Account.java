@@ -29,26 +29,29 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "viewAllAccounts", query = "SELECT A FROM Account A"
     )
-
     ,
     @NamedQuery(
-            name = "searchAccountsByName", query = "SELECT A FROM Account A WHERE name like :name"
+            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN Shared S ON A.id = S.account_id WHERE S.user_mail = :mail"
     )
     ,
     @NamedQuery(
-            name = "searchAccountsByDescription", query = "SELECT A FROM Account A WHERE description like :description"
+            name = "filterAccountsByName", query = "SELECT A FROM Account A WHERE name like :name"
     )
     ,
     @NamedQuery(
-            name = "searchAccountsWithHigherBalance", query = "SELECT A FROM Account A WHERE balance >= :balance"
+            name = "filterAccountsByDescription", query = "SELECT A FROM Account A WHERE description like :description"
     )
     ,
     @NamedQuery(
-            name = "searchAccountsWithLowerBalance", query = "SELECT A FROM Account A WHERE balance <= :balance"
+            name = "filterAccountsWithHigherBalance", query = "SELECT A FROM Account A WHERE balance >= :balance"
     )
     ,
     @NamedQuery(
-            name = "searchAccountsWithDivisa", query = "SELECT A FROM Account A WHERE divisa = :divisa"
+            name = "filterAccountsWithLowerBalance", query = "SELECT A FROM Account A WHERE balance <= :balance"
+    )
+    ,
+    @NamedQuery(
+            name = "filterAccountsByDivisa", query = "SELECT A FROM Account A WHERE divisa = :divisa"
     ),})
 @XmlRootElement
 public class Account implements Serializable {
