@@ -7,16 +7,15 @@ import exceptions.UpdateException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.entitys.Account;
-import model.entitys.Category;
+import model.enums.Category;
 import model.entitys.Expense;
-import model.entitys.Importance;
-import model.entitys.Period;
+import model.enums.Importance;
+import model.enums.Period;
 import model.interfaces.ExpenseInterface;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Ian.
  */
 public class ExpenseEJB implements ExpenseInterface {
 
@@ -208,5 +207,4 @@ public class ExpenseEJB implements ExpenseInterface {
         }
         return expenses;
     }
-
 }

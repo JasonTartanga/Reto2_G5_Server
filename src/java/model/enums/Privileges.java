@@ -1,4 +1,4 @@
-package model.entitys;
+package model.enums;
 
 /**
  * This enumeration is for users profiles. Includes the values USER and ADMIN

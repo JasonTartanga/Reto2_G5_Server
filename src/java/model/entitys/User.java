@@ -1,5 +1,6 @@
 package model.entitys;
 
+import model.enums.Privileges;
 import java.io.Serializable;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;

@@ -1,5 +1,6 @@
 package model.entitys;
 
+import model.enums.Permissions;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package model.entitys;
+package model.enums;
 
 /**
  *

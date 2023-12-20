@@ -5,10 +5,10 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
-import model.entitys.Category;
+import model.enums.Category;
 import model.entitys.Expense;
-import model.entitys.Importance;
-import model.entitys.Period;
+import model.enums.Importance;
+import model.enums.Period;
 
 /**
  *

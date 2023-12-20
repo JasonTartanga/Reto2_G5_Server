@@ -32,22 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "listAllRecurrents", query = "SELECT E FROM Expense E WHERE E.periodicity is not null"
-    )
-    ,
-    @NamedQuery(
-            name = "listAllPunctual", query = "SELECT E FROM Expense E WHERE E.importance is not null AND E.account.id = :id"
-    )
-    ,
-    @NamedQuery(
-            name = "searchAllRecurrentsByAccount", query = "SELECT E FROM Expense E WHERE E.periodicity is not null AND E.account.id = :id"
-    )
-    ,
-    @NamedQuery(
-            name = "searchAllPunctualByAccount", query = "SELECT E FROM Expense E WHERE E.importance is not null"
-    )
-    ,
-    @NamedQuery(
             name = "filterExpensesByName", query = "SELECT E FROM Expense E WHERE E.name like :name"
     )
     ,
@@ -63,12 +47,28 @@ import javax.xml.bind.annotation.XmlRootElement;
             name = "filterExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE E.amount <= :amount"
     )
     ,
+@NamedQuery(
+            name = "listAllRecurrents", query = "SELECT E FROM Expense E WHERE E.periodicity is not null"
+    )
+    ,
+    @NamedQuery(
+            name = "searchAllRecurrentsByAccount", query = "SELECT E FROM Expense E WHERE E.periodicity is not null AND E.account.id = :id"
+    )
+    ,
     @NamedQuery(
             name = "filterRecurrentByPeriodicity", query = "SELECT E FROM Expense E WHERE E.periodicity = :periodicity"
     )
     ,
     @NamedQuery(
             name = "filterRecurrentByCategory", query = "SELECT E FROM Expense E WHERE E.category = :category"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllPunctual", query = "SELECT E FROM Expense E WHERE E.date is not null AND E.account.id = :id"
+    )
+    ,
+    @NamedQuery(
+            name = "searchAllPunctualByAccount", query = "SELECT E FROM Expense E WHERE E.importance is not null"
     )
     ,
     @NamedQuery(
