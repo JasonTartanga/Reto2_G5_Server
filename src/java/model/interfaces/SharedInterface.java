@@ -19,7 +19,7 @@ public interface SharedInterface {
 
     public void deleteShared(Shared shared) throws DeleteException;
 
-    public Shared findShared(String id) throws SelectException;
+    public Shared findShared(Long account_id, String mail) throws SelectException;
 
     public List<Shared> findAllShared() throws SelectException;
 }

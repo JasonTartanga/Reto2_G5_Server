@@ -52,10 +52,12 @@ public class SharedEJB implements SharedInterface {
     }
 
     @Override
-    public Shared findShared(String id) throws SelectException {
+    public Shared findShared(Long account_id, String mail) throws SelectException {
         Shared s = null;
         try {
-            s = em.find(Shared.class, id);
+            s
+                    = (Shared) em.createNamedQuery("findShared").setParameter("id", account_id).setParameter("mail", mail).getSingleResult();
+
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

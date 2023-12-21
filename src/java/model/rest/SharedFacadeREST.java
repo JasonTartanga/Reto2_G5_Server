@@ -71,16 +71,16 @@ public class SharedFacadeREST {
     }
 
     @DELETE
-    @Path("delete/{id}")
-    public void remove(@PathParam("id") PathSegment id) throws SelectException, DeleteException {
-        si.deleteShared(si.findShared(id + ""));
+    @Path("delete/{account_id}/{user_mail}")
+    public void remove(@PathParam("account_id") Long account_id, @PathParam("account_id") String user_mail) throws SelectException, DeleteException {
+        si.deleteShared(si.findShared(account_id, user_mail));
     }
 
     @GET
-    @Path("findShared/{id}")
+    @Path("findShared/{account_id}/{user_mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Shared findShared(@PathParam("id") PathSegment id) throws SelectException {
-        return si.findShared(id + "");
+    public Shared findShared(@PathParam("account_id") Long account_id, @PathParam("account_id") String user_mail) throws SelectException {
+        return si.findShared(account_id, user_mail);
     }
 
     @GET

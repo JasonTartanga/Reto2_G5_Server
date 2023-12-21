@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,7 +19,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Shared", schema = "CashTracker")
-@NamedQuery(name = "findAllShared", query = "SELECT S FROM Shared S")
+@NamedQueries({
+    @NamedQuery(
+            name = "findShared", query = "SELECT S FROM Shared S WHERE S.idShared.id = :id AND S.idShared.mail = :mail"
+    )
+    ,
+    @NamedQuery(
+            name = "findAllShared", query = "SELECT S FROM Shared S"
+    ),})
 @XmlRootElement
 public class Shared implements Serializable {
 
