@@ -5,9 +5,9 @@ package model.enums;
  * @author Ian.
  */
 public enum Importance {
-    INDISPENSABLE,
-    RELEVANTE,
-    MODERADO,
-    POCO_RELEVANTE,
-    PRESCINDIBLE
+    Indispensable,
+    Relevante,
+    Moderado,
+    Poco_Relevante,
+    Prescindible
 }

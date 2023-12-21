@@ -91,14 +91,14 @@ public class AccountFacadeREST {
     @GET
     @Path("filterAccountsWithHigherBalance/{balance}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") String balance) throws SelectException {
+    public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") Float balance) throws SelectException {
         return ai.filterAccountsWithHigherBalance(balance);
     }
 
     @GET
     @Path("filterAccountsWithLowerBalance/{balance}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") String balance) throws SelectException {
+    public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") Float balance) throws SelectException {
         return ai.filterAccountsWithLowerBalance(balance);
     }
 

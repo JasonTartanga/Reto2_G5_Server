@@ -64,26 +64,27 @@ public class SharedFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") PathSegment id, Shared shared) throws UpdateException {
         si.updateShared(shared);
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("delete/{id}")
     public void remove(@PathParam("id") PathSegment id) throws SelectException, DeleteException {
         si.deleteShared(si.findShared(id + ""));
     }
 
     @GET
-    @Path("{id}")
+    @Path("findShared/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Shared find(@PathParam("id") PathSegment id) throws SelectException {
+    public Shared findShared(@PathParam("id") PathSegment id) throws SelectException {
         return si.findShared(id + "");
     }
 
     @GET
+    @Path("findAllShareds")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Shared> findAll() throws SelectException {
         return si.findAllShared();

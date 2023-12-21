@@ -10,5 +10,5 @@ public enum Plan {
     Pareja,
     Celebracion,
     Proyecto,
-    Otros
+    Otro
 }

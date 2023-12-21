@@ -22,7 +22,7 @@ public interface PunctualInterface {
 
     public List<Expense> listAllPunctual() throws SelectException;
 
-    public List<Expense> searchAllPunctualByAccount(String id) throws SelectException;
+    public List<Expense> searchAllPunctualByAccount(Long id) throws SelectException;
 
     public List<Expense> filterPunctualByImportance(String importance) throws SelectException;
 

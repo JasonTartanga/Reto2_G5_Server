@@ -67,7 +67,7 @@ public class UserEJB implements UserInterface {
         List<User> users = null;
         try {
             users
-                    = em.createNamedQuery("viewAllAccounts").getResultList();
+                    = em.createNamedQuery("viewAllUsers").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -75,10 +75,10 @@ public class UserEJB implements UserInterface {
     }
 
     @Override
-    public User loginUser(User user) throws SelectException {
+    public User loginUser(String mail, String passwd) throws SelectException {
         User u = null;
         try {
-            u = (User) em.createNamedQuery("searchAllAccountsByUser").setParameter("mail", user.getMail()).setParameter("password", user.getPassword()).getSingleResult();
+            u = (User) em.createNamedQuery("loginUser").setParameter("mail", mail).setParameter("password", passwd).getSingleResult();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

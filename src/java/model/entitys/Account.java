@@ -31,12 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
             name = "viewAllAccounts", query = "SELECT A FROM Account A"
     )
     ,
-  /*  @NamedQuery(
-            //  name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN Shared S ON A.id = S.account_id WHERE S.user_mail = :mail"
-            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A WHERE A.shared.user.mail = :mail"
+   @NamedQuery(
+            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail"
     )
     ,
-  */  @NamedQuery(
+        @NamedQuery(
             name = "filterAccountsByName", query = "SELECT A FROM Account A WHERE A.name like :name"
     )
     ,
@@ -68,7 +67,7 @@ public class Account implements Serializable {
     private String name;
     private String description;
     private String divisa;
-    private double balance;
+    private Float balance;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -115,11 +114,11 @@ public class Account implements Serializable {
         this.divisa = divisa;
     }
 
-    public double getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 

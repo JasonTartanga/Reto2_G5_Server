@@ -58,7 +58,7 @@ public class ExpenseEJB implements ExpenseInterface {
         List<Expense> expenses = null;
         try {
             expenses
-                    = em.createNamedQuery("filterExpensesByName").setParameter("name", name).getResultList();
+                    = em.createNamedQuery("filterExpensesByName").setParameter("name", "%" + name + "%").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -70,7 +70,7 @@ public class ExpenseEJB implements ExpenseInterface {
         List<Expense> expenses = null;
         try {
             expenses
-                    = em.createNamedQuery("filterExpensesByConcept").setParameter("concept", concept).getResultList();
+                    = em.createNamedQuery("filterExpensesByConcept").setParameter("concept", "%" + concept + "%").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

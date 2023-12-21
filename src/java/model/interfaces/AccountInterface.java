@@ -29,9 +29,9 @@ public interface AccountInterface {
 
     public List<Account> filterAccountsByDescription(String description) throws SelectException;
 
-    public List<Account> filterAccountsWithHigherBalance(String balance) throws SelectException;
+    public List<Account> filterAccountsWithHigherBalance(Float balance) throws SelectException;
 
-    public List<Account> filterAccountsWithLowerBalance(String balance) throws SelectException;
+    public List<Account> filterAccountsWithLowerBalance(Float balance) throws SelectException;
 
     public List<Account> filterAccountsByDivisa(String divisa) throws SelectException;
 }

@@ -23,6 +23,6 @@ public interface UserInterface {
 
     public List<User> viewAllUser() throws SelectException;
 
-    public User loginUser(User user) throws SelectException;
+    public User loginUser(String mail, String passwd) throws SelectException;
 
 }

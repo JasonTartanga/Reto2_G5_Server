@@ -17,6 +17,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @DiscriminatorValue("Recurrent")
+@NamedQueries({
+    @NamedQuery(
+            name = "listAllRecurrents", query = "SELECT R FROM Recurrent R"
+    )
+    ,
+    @NamedQuery(
+            name = "searchAllRecurrentsByAccount", query = "SELECT R FROM Recurrent R WHERE R.account.id = :id"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurrentByPeriodicity", query = "SELECT R FROM Recurrent R WHERE R.periodicity = :periodicity"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurrentByCategory", query = "SELECT E FROM Expense E WHERE E.category = :category"
+    ),})
 @XmlRootElement
 public class Recurrent extends Expense implements Serializable {
 

@@ -6,6 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -14,6 +16,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @DiscriminatorValue("Punctual")
+@NamedQueries({
+    @NamedQuery(
+            name = "listAllPunctual", query = "SELECT P FROM Punctual P"
+    )
+    ,
+    @NamedQuery(
+            name = "searchAllPunctualByAccount", query = "SELECT P FROM Punctual P WHERE P.account.id = :id AND P.importance is not null"
+    )
+    ,
+    @NamedQuery(
+            name = "filterPunctualByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance"
+    ),})
 @XmlRootElement
 public class Punctual extends Expense implements Serializable {
 

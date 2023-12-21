@@ -7,8 +7,6 @@ import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,9 +27,6 @@ import model.interfaces.UserInterface;
 @Path("entitys.user")
 public class UserFacadeREST {
 
-    @PersistenceContext(unitName = "Reto2_G5_ServerPU")
-    private EntityManager em;
-
     @EJB
     private UserInterface ui;
 
@@ -46,35 +41,36 @@ public class UserFacadeREST {
     }
 
     @PUT
-    @Path("update/{id}")
+    @Path("update/{mail}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateUser(@PathParam("id") String id, User user) throws UpdateException {
+    public void updateUser(@PathParam("mail") String mail, User user) throws UpdateException {
         ui.updateUser(user);
     }
 
     @DELETE
-    @Path("delete/{id}")
-    public void deleteUser(@PathParam("id") String id) throws DeleteException, SelectException {
-        ui.deleteUser(ui.findUser(id));
+    @Path("delete/{mail}")
+    public void deleteUser(@PathParam("mail") String mail) throws DeleteException, SelectException {
+        ui.deleteUser(ui.findUser(mail));
     }
 
     @GET
-    @Path("find/{id}")
+    @Path("find/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User find(@PathParam("id") String id) {
-        //  return super.find(id);
-        return null;
+    public User find(@PathParam("mail") String mail) throws SelectException {
+        return ui.findUser(mail);
     }
 
     @GET
+    @Path("findAllUsers")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<User> findAllUsers() throws SelectException {
         return ui.viewAllUser();
     }
 
     @GET
+    @Path("find/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User loginUser(User user) throws SelectException {
-        return ui.loginUser(user);
+    public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
+        return ui.loginUser(mail, passwd);
     }
 }

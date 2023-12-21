@@ -67,7 +67,7 @@ public class SharedEJB implements SharedInterface {
         List<Shared> shareds = null;
         try {
             shareds
-                    = em.createNamedQuery("viewAllAccounts").getResultList();
+                    = em.createNamedQuery("findAllShared").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

@@ -22,7 +22,7 @@ public interface RecurrentInterface {
 
     public List<Expense> listAllRecurrents() throws SelectException;
 
-    public List<Expense> searchAllRecurrentsByAccount(String id) throws SelectException;
+    public List<Expense> searchAllRecurrentsByAccount(Long id) throws SelectException;
 
     public List<Expense> filterRecurrentByPeriodicity(String periodicity) throws SelectException;
 

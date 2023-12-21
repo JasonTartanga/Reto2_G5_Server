@@ -63,7 +63,7 @@ public class RecurrentFacadeREST {
     @GET
     @Path("searchAllRecurrentsByAccount/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> searchAllRecurrentsByAccount(@PathParam("id") String id) throws SelectException {
+    public List<Expense> searchAllRecurrentsByAccount(@PathParam("id") Long id) throws SelectException {
         return ri.searchAllRecurrentsByAccount(id);
     }
 

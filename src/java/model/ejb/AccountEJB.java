@@ -91,7 +91,7 @@ public class AccountEJB implements AccountInterface {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsByName").setParameter("name", name).getResultList();
+                    = em.createNamedQuery("filterAccountsByName").setParameter("name", "%" + name + "%").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -103,7 +103,7 @@ public class AccountEJB implements AccountInterface {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsByDescription").setParameter("description", description).getResultList();
+                    = em.createNamedQuery("filterAccountsByDescription").setParameter("description", "%" + description + "%").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -111,7 +111,7 @@ public class AccountEJB implements AccountInterface {
     }
 
     @Override
-    public List<Account> filterAccountsWithHigherBalance(String balance) throws SelectException {
+    public List<Account> filterAccountsWithHigherBalance(Float balance) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
@@ -123,7 +123,7 @@ public class AccountEJB implements AccountInterface {
     }
 
     @Override
-    public List<Account> filterAccountsWithLowerBalance(String balance) throws SelectException {
+    public List<Account> filterAccountsWithLowerBalance(Float balance) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts

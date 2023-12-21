@@ -65,7 +65,7 @@ public class PunctualEJB implements PunctualInterface {
     }
 
     @Override
-    public List<Expense> searchAllPunctualByAccount(String id) throws SelectException {
+    public List<Expense> searchAllPunctualByAccount(Long id) throws SelectException {
         List<Expense> expenses = null;
         try {
             expenses

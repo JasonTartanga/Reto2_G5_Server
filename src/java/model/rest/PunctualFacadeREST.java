@@ -63,7 +63,7 @@ public class PunctualFacadeREST {
     @GET
     @Path("searchAllPunctualByAccount/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> searchAllPunctualByAccount(@PathParam("id") String id) throws SelectException {
+    public List<Expense> searchAllPunctualByAccount(@PathParam("id") Long id) throws SelectException {
         return pi.searchAllPunctualByAccount(id);
     }
 

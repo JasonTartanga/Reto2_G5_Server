@@ -65,7 +65,7 @@ public class RecurrentEJB implements RecurrentInterface {
     }
 
     @Override
-    public List<Expense> searchAllRecurrentsByAccount(String id) throws SelectException {
+    public List<Expense> searchAllRecurrentsByAccount(Long id) throws SelectException {
         List<Expense> expenses = null;
         try {
             expenses
