@@ -8,33 +8,33 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.entitys.User;
-import model.interfaces.UserInterface;
+import model.entitys.Shared;
+import model.interfaces.SharedInterface;
 
 /**
  *
- * @author Ian.
+ * @author Jason.
  */
 @Stateless
-public class UserEJB implements UserInterface {
+public class SharedEJB implements SharedInterface {
 
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
 
     @Override
-    public void createUser(User user) throws CreateException {
+    public void createShared(Shared shared) throws CreateException {
         try {
-            em.persist(user);
+            em.persist(shared);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
         }
     }
 
     @Override
-    public void updateUser(User user) throws UpdateException {
+    public void updateShared(Shared shared) throws UpdateException {
         try {
-            if (!em.contains(user)) {
-                em.merge(user);
+            if (!em.contains(shared)) {
+                em.merge(shared);
             }
             em.flush();
         } catch (Exception e) {
@@ -43,46 +43,35 @@ public class UserEJB implements UserInterface {
     }
 
     @Override
-    public void deleteUser(User user) throws DeleteException {
+    public void deleteShared(Shared shared) throws DeleteException {
         try {
-            em.remove(em.merge(user));
+            em.remove(em.merge(shared));
         } catch (Exception e) {
             throw new DeleteException(e.getMessage());
         }
     }
 
     @Override
-    public User findUser(String mail) throws SelectException {
-        User u = null;
+    public Shared findShared(String id) throws SelectException {
+        Shared s = null;
         try {
-            u = (User) em.find(User.class, mail);
+            s = em.find(Shared.class, id);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return u;
+        return s;
     }
 
     @Override
-    public List<User> viewAllUser() throws SelectException {
-        List<User> users = null;
+    public List<Shared> findAllShared() throws SelectException {
+        List<Shared> shareds = null;
         try {
-            users
+            shareds
                     = em.createNamedQuery("viewAllAccounts").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return users;
+        return shareds;
     }
 
-    @Override
-    public User loginUser(User user) throws SelectException {
-        User u = null;
-        try {
-            u = (User) em.createNamedQuery("searchAllAccountsByUser").setParameter("mail", user.getMail()).setParameter("password", user.getPassword()).getSingleResult();
-        } catch (Exception e) {
-            throw new SelectException(e.getMessage());
-        }
-
-        return u;
-    }
 }

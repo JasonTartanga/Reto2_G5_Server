@@ -1,9 +1,12 @@
 package model.rest;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Account;
+import model.interfaces.AccountInterface;
 
 /**
  *
@@ -21,66 +25,87 @@ import model.entitys.Account;
  */
 @Stateless
 @Path("entitys.account")
-public class AccountFacadeREST extends AbstractFacade<Account> {
+public class AccountFacadeREST {
 
-    @PersistenceContext(unitName = "Reto2_G5_ServerPU")
-    private EntityManager em;
+    @EJB
+    private AccountInterface ai;
 
     public AccountFacadeREST() {
-        super(Account.class);
+
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Account entity) {
-        super.create(entity);
+    public void createAccount(Account account) throws CreateException {
+        ai.createAccount(account);
     }
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Account entity) {
-        super.edit(entity);
+    public void updateAccount(Account account) throws UpdateException {
+        ai.updateAccount(account);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    @Path("delete/{id}")
+    public void deleteAccount(Account account) throws DeleteException {
+        ai.deleteAccount(account);
     }
 
     @GET
-    @Path("{id}")
+    @Path("find/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Account find(@PathParam("id") Long id) {
-        return super.find(id);
+    public Account find(@PathParam("id") Long id) throws SelectException {
+        return ai.findAccount(id);
     }
 
     @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> findAll() {
-        return super.findAll();
+    @Path("viewAllAccounts")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> viewAllAccounts() throws SelectException {
+        return ai.viewAllAccounts();
     }
 
     @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("searchAllAccountsByUser/{mail}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> searchAllAccountsByUser(@PathParam("mail") String mail) throws SelectException {
+        return ai.searchAllAccountsByUser(mail);
     }
 
     @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
+    @Path("filterAccountsByName/{name}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsByName(@PathParam("name") String name) throws SelectException {
+        return ai.filterAccountsByName(name);
     }
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    @GET
+    @Path("filterAccountsByDescription/{description}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsByDescription(@PathParam("description") String description) throws SelectException {
+        return ai.filterAccountsByDescription(description);
     }
 
+    @GET
+    @Path("filterAccountsWithHigherBalance/{balance}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") String balance) throws SelectException {
+        return ai.filterAccountsWithHigherBalance(balance);
+    }
+
+    @GET
+    @Path("filterAccountsWithLowerBalance/{balance}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") String balance) throws SelectException {
+        return ai.filterAccountsWithLowerBalance(balance);
+    }
+
+    @GET
+    @Path("filterAccountsByDivisa/{divisa}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsByDivisa(@PathParam("divisa") String divisa) throws SelectException {
+        return ai.filterAccountsByDivisa(divisa);
+    }
 }

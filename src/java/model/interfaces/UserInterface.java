@@ -19,6 +19,8 @@ public interface UserInterface {
 
     public void deleteUser(User user) throws DeleteException;
 
+    public User findUser(String mail) throws SelectException;
+
     public List<User> viewAllUser() throws SelectException;
 
     public User loginUser(User user) throws SelectException;

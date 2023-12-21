@@ -1,9 +1,12 @@
 package model.rest;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,9 +14,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import model.entitys.Expense;
 import model.entitys.Recurrent;
+import model.interfaces.RecurrentInterface;
 
 /**
  *
@@ -21,66 +25,60 @@ import model.entitys.Recurrent;
  */
 @Stateless
 @Path("entitys.recurrent")
-public class RecurrentFacadeREST extends AbstractFacade<Recurrent> {
+public class RecurrentFacadeREST {
 
-    @PersistenceContext(unitName = "Reto2_G5_ServerPU")
-    private EntityManager em;
+    @EJB
+    private RecurrentInterface ri;
 
     public RecurrentFacadeREST() {
-        super(Recurrent.class);
+
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Recurrent entity) {
-        super.create(entity);
+    public void createRecurrent(Recurrent recurrent) throws CreateException {
+        ri.createRecurrent(recurrent);
     }
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Recurrent entity) {
-        super.edit(entity);
+    public void updateRecurrent(Recurrent recurrent) throws UpdateException {
+        ri.updateRecurrent(recurrent);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    @Path("delete/{id}")
+    public void deleteRecurrent(Recurrent recurrent) throws DeleteException {
+        ri.deleteRecurrent(recurrent);
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Recurrent find(@PathParam("id") Long id) {
-        return super.find(id);
+    @Path("listAllRecurrents")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> listAllRecurrents() throws SelectException {
+        return ri.listAllRecurrents();
     }
 
     @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> findAll() {
-        return super.findAll();
+    @Path("searchAllRecurrentsByAccount/{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> searchAllRecurrentsByAccount(@PathParam("id") String id) throws SelectException {
+        return ri.searchAllRecurrentsByAccount(id);
     }
 
     @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("filterRecurrentByPeriodicity/{periodicity}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> filterRecurrentByPeriodicity(@PathParam("periodicity") String periodicity) throws SelectException {
+        return ri.filterRecurrentByPeriodicity(periodicity);
     }
 
     @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    @Path("filterRecurrentByCategory/{category}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> filterRecurrentByCategory(@PathParam("category") String category) throws SelectException {
+        return ri.filterRecurrentByCategory(category);
     }
 
 }

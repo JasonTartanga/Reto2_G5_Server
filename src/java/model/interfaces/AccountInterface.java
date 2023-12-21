@@ -19,6 +19,8 @@ public interface AccountInterface {
 
     public void deleteAccount(Account account) throws DeleteException;
 
+    public Account findAccount(Long id) throws SelectException;
+
     public List<Account> viewAllAccounts() throws SelectException;
 
     public List<Account> searchAllAccountsByUser(String mail) throws SelectException;

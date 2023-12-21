@@ -5,6 +5,7 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Account;
@@ -14,6 +15,7 @@ import model.interfaces.AccountInterface;
  *
  * @author Jessica.
  */
+@Stateless
 public class AccountEJB implements AccountInterface {
 
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
@@ -47,6 +49,17 @@ public class AccountEJB implements AccountInterface {
         } catch (Exception e) {
             throw new DeleteException(e.getMessage());
         }
+    }
+
+    @Override
+    public Account findAccount(Long id) throws SelectException {
+        Account a = null;
+        try {
+            a = em.find(Account.class, id);
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return a;
     }
 
     @Override

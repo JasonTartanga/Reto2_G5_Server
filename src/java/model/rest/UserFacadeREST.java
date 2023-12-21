@@ -1,6 +1,11 @@
 package model.rest;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.entitys.User;
+import model.interfaces.UserInterface;
 
 /**
  *
@@ -21,66 +27,54 @@ import model.entitys.User;
  */
 @Stateless
 @Path("entitys.user")
-public class UserFacadeREST extends AbstractFacade<User> {
+public class UserFacadeREST {
 
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
 
+    @EJB
+    private UserInterface ui;
+
     public UserFacadeREST() {
-        super(User.class);
+
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(User entity) {
-        super.create(entity);
+    public void createUser(User user) throws CreateException {
+        ui.createUser(user);
     }
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, User entity) {
-        super.edit(entity);
+    public void updateUser(@PathParam("id") String id, User user) throws UpdateException {
+        ui.updateUser(user);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") String id) {
-        super.remove(super.find(id));
+    @Path("delete/{id}")
+    public void deleteUser(@PathParam("id") String id) throws DeleteException, SelectException {
+        ui.deleteUser(ui.findUser(id));
     }
 
     @GET
-    @Path("{id}")
+    @Path("find/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User find(@PathParam("id") String id) {
-        return super.find(id);
+        //  return super.find(id);
+        return null;
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<User> findAll() {
-        return super.findAll();
+    public List<User> findAllUsers() throws SelectException {
+        return ui.viewAllUser();
     }
 
     @GET
-    @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    public User loginUser(User user) throws SelectException {
+        return ui.loginUser(user);
     }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
 }

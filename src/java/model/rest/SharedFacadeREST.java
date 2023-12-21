@@ -1,9 +1,12 @@
 package model.rest;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import model.entitys.Shared;
 import model.entitys.SharedId;
+import model.interfaces.SharedInterface;
 
 /**
  *
@@ -23,10 +27,10 @@ import model.entitys.SharedId;
  */
 @Stateless
 @Path("entitys.shared")
-public class SharedFacadeREST extends AbstractFacade<Shared> {
+public class SharedFacadeREST {
 
-    @PersistenceContext(unitName = "Reto2_G5_ServerPU")
-    private EntityManager em;
+    @EJB
+    private SharedInterface si;
 
     private SharedId getPrimaryKey(PathSegment pathSegment) {
         /*
@@ -50,62 +54,38 @@ public class SharedFacadeREST extends AbstractFacade<Shared> {
     }
 
     public SharedFacadeREST() {
-        super(Shared.class);
+
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Shared entity) {
-        super.create(entity);
+    public void create(Shared shared) throws CreateException {
+        si.createShared(shared);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, Shared entity) {
-        super.edit(entity);
+    public void edit(@PathParam("id") PathSegment id, Shared shared) throws UpdateException {
+        si.updateShared(shared);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        model.entitys.SharedId key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    public void remove(@PathParam("id") PathSegment id) throws SelectException, DeleteException {
+        si.deleteShared(si.findShared(id + ""));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Shared find(@PathParam("id") PathSegment id) {
-        model.entitys.SharedId key = getPrimaryKey(id);
-        return super.find(key);
+    public Shared find(@PathParam("id") PathSegment id) throws SelectException {
+        return si.findShared(id + "");
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Shared> findAll() {
-        return super.findAll();
+    public List<Shared> findAll() throws SelectException {
+        return si.findAllShared();
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Shared> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
 }

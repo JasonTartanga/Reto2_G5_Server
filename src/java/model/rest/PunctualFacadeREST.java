@@ -1,9 +1,12 @@
 package model.rest;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
+import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,9 +14,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import model.entitys.Expense;
 import model.entitys.Punctual;
+import model.interfaces.PunctualInterface;
 
 /**
  *
@@ -21,66 +25,52 @@ import model.entitys.Punctual;
  */
 @Stateless
 @Path("entitys.punctual")
-public class PunctualFacadeREST extends AbstractFacade<Punctual> {
+public class PunctualFacadeREST {
 
-    @PersistenceContext(unitName = "Reto2_G5_ServerPU")
-    private EntityManager em;
+    @EJB
+    private PunctualInterface pi;
 
     public PunctualFacadeREST() {
-        super(Punctual.class);
+
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Punctual entity) {
-        super.create(entity);
+    public void createPunctual(Punctual punctual) throws CreateException {
+        pi.createPunctual(punctual);
     }
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Punctual entity) {
-        super.edit(entity);
+    public void updatePunctual(Punctual punctual) throws UpdateException {
+        pi.updatePunctual(punctual);
     }
 
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
-        super.remove(super.find(id));
+    @Path("delete/{id}")
+    public void deletePunctual(Punctual punctual) throws DeleteException {
+        pi.deletePunctual(punctual);
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Punctual find(@PathParam("id") Long id) {
-        return super.find(id);
+    @Path("listAllPunctual")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> listAllPunctual() throws SelectException {
+        return pi.listAllPunctual();
     }
 
     @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> findAll() {
-        return super.findAll();
+    @Path("searchAllPunctualByAccount/{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> searchAllPunctualByAccount(@PathParam("id") String id) throws SelectException {
+        return pi.searchAllPunctualByAccount(id);
     }
 
     @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("filterPunctualByImportance/{importance}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> filterPunctualByImportance(@PathParam("importance") String importance) throws SelectException {
+        return pi.filterPunctualByImportance(importance);
     }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
 }
