@@ -9,7 +9,7 @@ import model.entitys.Shared;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 public interface SharedInterface {
 

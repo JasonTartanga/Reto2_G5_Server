@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 @Embeddable
 public class SharedId implements Serializable {

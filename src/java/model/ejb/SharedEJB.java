@@ -13,7 +13,7 @@ import model.interfaces.SharedInterface;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 @Stateless
 public class SharedEJB implements SharedInterface {

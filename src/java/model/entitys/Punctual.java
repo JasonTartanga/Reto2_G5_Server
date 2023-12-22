@@ -18,14 +18,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @DiscriminatorValue("Punctual")
 @NamedQueries({
     @NamedQuery(
-            name = "listAllPunctual", query = "SELECT P FROM Punctual P"
+            name = "listAllPunctuals", query = "SELECT P FROM Punctual P"
     )
     ,
     @NamedQuery(
-            name = "searchAllPunctualByAccount", query = "SELECT P FROM Punctual P WHERE P.account.id = :id AND P.importance is not null"
+            name = "findPunctual", query = "SELECT P FROM Punctual P WHERE P.uuid = :uuid"
     )
     ,
     @NamedQuery(
+            name = "findPunctualsByAccount", query = "SELECT P FROM Punctual P WHERE P.account.id = :id"
+    )
+    ,@NamedQuery(
             name = "filterPunctualByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance"
     ),})
 @XmlRootElement

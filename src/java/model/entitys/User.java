@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author Jason.
+ * @author Ian.
  */
 @Entity
 @Table(name = "User", schema = "CashTracker")

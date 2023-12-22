@@ -8,13 +8,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.entitys.Expense;
 import model.entitys.Punctual;
+import model.entitys.Recurrent;
 import model.interfaces.PunctualInterface;
 
 /**
  *
- * @author Jason.
+ * @author Ian.
  */
 @Stateless
 public class PunctualEJB implements PunctualInterface {
@@ -53,39 +53,50 @@ public class PunctualEJB implements PunctualInterface {
     }
 
     @Override
-    public List<Expense> listAllPunctual() throws SelectException {
-        List<Expense> expenses = null;
+    public List<Punctual> listAllPunctuals() throws SelectException {
+        List<Punctual> punctuals = null;
         try {
-            expenses
-                    = em.createNamedQuery("listAllPunctual").getResultList();
+            punctuals
+                    = em.createNamedQuery("listAllPunctuals").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return punctuals;
     }
 
     @Override
-    public List<Expense> searchAllPunctualByAccount(Long id) throws SelectException {
-        List<Expense> expenses = null;
+    public Punctual findPunctual(Long id) throws SelectException {
+        Punctual p = null;
         try {
-            expenses
-                    = em.createNamedQuery("searchAllPunctualByAccount").setParameter("id", id).getResultList();
+            p = em.find(Punctual.class, id);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return p;
     }
 
     @Override
-    public List<Expense> filterPunctualByImportance(String importance) throws SelectException {
-        List<Expense> expenses = null;
+    public List<Punctual> findPunctualsByAccount(Long id) throws SelectException {
+        List<Punctual> punctuals = null;
         try {
-            expenses
+            punctuals
+                    = em.createNamedQuery("findPunctualsByAccount").setParameter("id", id).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return punctuals;
+    }
+
+    @Override
+    public List<Punctual> filterPunctualByImportance(String importance) throws SelectException {
+        List<Punctual> punctuals = null;
+        try {
+            punctuals
                     = em.createNamedQuery("filterPunctualByImportance").setParameter("importance", importance).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return punctuals;
     }
 
 }

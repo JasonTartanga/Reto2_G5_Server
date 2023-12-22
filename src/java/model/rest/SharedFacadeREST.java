@@ -23,7 +23,7 @@ import model.interfaces.SharedInterface;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 @Path("entitys.shared")
 public class SharedFacadeREST {

@@ -23,7 +23,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "searchAllRecurrentsByAccount", query = "SELECT R FROM Recurrent R WHERE R.account.id = :id"
+            name = "findRecurrent", query = "SELECT R FROM Recurrent R WHERE R.uuid = :uuid"
+    )
+    ,
+    @NamedQuery(
+            name = "findRecurrentsByAccount", query = "SELECT R FROM Recurrent R WHERE R.account.id = :id"
     )
     ,
     @NamedQuery(
@@ -31,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentByCategory", query = "SELECT E FROM Expense E WHERE E.category = :category"
+            name = "filterRecurrentByCategory", query = "SELECT R FROM Recurrent R WHERE R.category = :category"
     ),})
 @XmlRootElement
 public class Recurrent extends Expense implements Serializable {

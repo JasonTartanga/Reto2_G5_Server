@@ -1,11 +1,14 @@
 package model.ejb;
 
 import exceptions.SelectException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Expense;
+import model.entitys.Punctual;
+import model.entitys.Recurrent;
 import model.interfaces.ExpenseInterface;
 
 /**
@@ -19,38 +22,40 @@ public class ExpenseEJB implements ExpenseInterface {
     private EntityManager em;
 
     @Override
-    public List<Expense> findAllExpenses() throws SelectException {
+    public List<Expense> listAllExpenses() throws SelectException {
         List<Expense> expenses = null;
+        List<Expense> expenseNew = new ArrayList<>();
         try {
             expenses
-                    = em.createNamedQuery("findAllExpenses").getResultList();
+                    = em.createNamedQuery("listAllExpenses").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
-    }
-
-    @Override
-    public List<Expense> searchAllExpensesByAccount(Long id) throws SelectException {
-        List<Expense> expenses = null;
-        try {
-            expenses
-                    = em.createNamedQuery("searchAllExpensesByAccount").setParameter("id", id).getResultList();
-        } catch (Exception e) {
-            throw new SelectException(e.getMessage());
-        }
-        return expenses;
+        return expenseNew;
     }
 
     @Override
     public Expense findExpense(Long id) throws SelectException {
-        Expense a = null;
+        Expense e = null;
         try {
-            a = em.find(Expense.class, id);
+            e = em.find(Expense.class, id);
+        } catch (Exception ex) {
+            throw new SelectException(ex.getMessage());
+        }
+        return e;
+    }
+
+    @Override
+    public List<Expense> findExpensesByAccount(Long id) throws SelectException {
+        List<Expense> expenses = null;
+        try {
+            expenses
+                    = em.createNamedQuery("findExpensesByAccount").setParameter("id", id).getResultList();
+            expenses = this.mappearList(expenses);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return a;
+        return expenses;
     }
 
     @Override
@@ -59,6 +64,7 @@ public class ExpenseEJB implements ExpenseInterface {
         try {
             expenses
                     = em.createNamedQuery("filterExpensesByName").setParameter("name", "%" + name + "%").getResultList();
+            expenses = this.mappearList(expenses);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -71,6 +77,7 @@ public class ExpenseEJB implements ExpenseInterface {
         try {
             expenses
                     = em.createNamedQuery("filterExpensesByConcept").setParameter("concept", "%" + concept + "%").getResultList();
+            expenses = this.mappearList(expenses);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -83,6 +90,7 @@ public class ExpenseEJB implements ExpenseInterface {
         try {
             expenses
                     = em.createNamedQuery("filterExpensesWithHigherAmount").setParameter("amount", amount).getResultList();
+            expenses = this.mappearList(expenses);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -95,9 +103,19 @@ public class ExpenseEJB implements ExpenseInterface {
         try {
             expenses
                     = em.createNamedQuery("filterExpensesWithLowerAmount").setParameter("amount", amount).getResultList();
+            expenses = this.mappearList(expenses);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
         return expenses;
+    }
+
+    public List<Expense> mappearList(List<Expense> expenses) throws SelectException {
+        List<Expense> expensesNew = new ArrayList<>();
+
+        for (Expense e : expenses) {
+            expensesNew.add(this.findExpense(e.getUuid()));
+        }
+        return expensesNew;
     }
 }

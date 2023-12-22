@@ -6,15 +6,15 @@ import model.entitys.Expense;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Ian.
  */
 public interface ExpenseInterface {
 
+    public List<Expense> listAllExpenses() throws SelectException;
+
     public Expense findExpense(Long id) throws SelectException;
 
-    public List<Expense> findAllExpenses() throws SelectException;
-
-    public List<Expense> searchAllExpensesByAccount(Long id) throws SelectException;
+    public List<Expense> findExpensesByAccount(Long id) throws SelectException;
 
     public List<Expense> filterExpensesByName(String name) throws SelectException;
 

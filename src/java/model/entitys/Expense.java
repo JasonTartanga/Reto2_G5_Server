@@ -18,17 +18,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ian.
+ * @author Jason, Ian.
  */
 @Entity
 @Table(name = "Expense", schema = "CashTracker")
 @NamedQueries({
     @NamedQuery(
-            name = "viewAllExpenses", query = "SELECT E FROM Expense E"
+            name = "listAllExpenses", query = "SELECT E FROM Expense E"
     )
     ,
     @NamedQuery(
-            name = "searchAllExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
+            name = "findExpense", query = "SELECT E FROM Expense E WHERE E.uuid = :uuid"
+    )
+    ,
+    @NamedQuery(
+            name = "findExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
     )
     ,
     @NamedQuery(
@@ -45,8 +49,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     ,
     @NamedQuery(
             name = "filterExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE E.amount <= :amount"
-    ),
-})
+    ),})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class Expense implements Serializable {

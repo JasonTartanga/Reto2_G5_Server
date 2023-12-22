@@ -8,7 +8,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.entitys.Expense;
 import model.entitys.Recurrent;
 import model.interfaces.RecurrentInterface;
 
@@ -53,51 +52,62 @@ public class RecurrentEJB implements RecurrentInterface {
     }
 
     @Override
-    public List<Expense> listAllRecurrents() throws SelectException {
-        List<Expense> expenses = null;
+    public List<Recurrent> listAllRecurrents() throws SelectException {
+        List<Recurrent> recurrents = null;
         try {
-            expenses
+            recurrents
                     = em.createNamedQuery("listAllRecurrents").getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return recurrents;
     }
 
     @Override
-    public List<Expense> searchAllRecurrentsByAccount(Long id) throws SelectException {
-        List<Expense> expenses = null;
+    public Recurrent findRecurrent(Long id) throws SelectException {
+        Recurrent r = null;
         try {
-            expenses
-                    = em.createNamedQuery("searchAllRecurrentsByAccount").setParameter("id", id).getResultList();
+            r = em.find(Recurrent.class, id);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return r;
     }
 
     @Override
-    public List<Expense> filterRecurrentByPeriodicity(String periodicity) throws SelectException {
-        List<Expense> expenses = null;
+    public List<Recurrent> findRecurrentsByAccount(Long id) throws SelectException {
+        List<Recurrent> recurrents = null;
         try {
-            expenses
+            recurrents
+                    = em.createNamedQuery("findRecurrentsByAccount").setParameter("id", id).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return recurrents;
+    }
+
+    @Override
+    public List<Recurrent> filterRecurrentByPeriodicity(String periodicity) throws SelectException {
+        List<Recurrent> recurrents = null;
+        try {
+            recurrents
                     = em.createNamedQuery("filterRecurrentByPeriodicity").setParameter("periodicity", periodicity).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return recurrents;
     }
 
     @Override
-    public List<Expense> filterRecurrentByCategory(String category) throws SelectException {
-        List<Expense> expenses = null;
+    public List<Recurrent> filterRecurrentByCategory(String category) throws SelectException {
+        List<Recurrent> recurrents = null;
         try {
-            expenses
+            recurrents
                     = em.createNamedQuery("filterRecurrentByCategory").setParameter("category", category).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return expenses;
+        return recurrents;
     }
 
 }

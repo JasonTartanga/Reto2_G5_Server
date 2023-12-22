@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 @Entity
 @Table(name = "Shared", schema = "CashTracker")

@@ -6,7 +6,6 @@ import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,7 +20,7 @@ import model.interfaces.AccountInterface;
 
 /**
  *
- * @author Jason.
+ * @author Jessica.
  */
 @Path("entitys.account")
 public class AccountFacadeREST {
@@ -48,8 +47,8 @@ public class AccountFacadeREST {
 
     @DELETE
     @Path("delete/{id}")
-    public void deleteAccount(Account account) throws DeleteException {
-        ai.deleteAccount(account);
+    public void deleteAccount(@PathParam("id") Long id) throws DeleteException, SelectException {
+        ai.deleteAccount(ai.findAccount(id));
     }
 
     @GET

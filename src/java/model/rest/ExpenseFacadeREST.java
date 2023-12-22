@@ -14,7 +14,7 @@ import model.interfaces.ExpenseInterface;
 
 /**
  *
- * @author Jason.
+ * @author Jason, Jessica.
  */
 @Path("expense")
 public class ExpenseFacadeREST {
@@ -27,24 +27,24 @@ public class ExpenseFacadeREST {
     }
 
     @GET
-    @Path("find/{id}")
+    @Path("listAllExpenses")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Expense> listAllExpenses() throws SelectException {
+        return ei.listAllExpenses();
+    }
+
+    @GET
+    @Path("findExpense/{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Expense find(@PathParam("id") Long id) throws SelectException {
-        return ei.findExpense(id);
+    public Expense findExpense(@PathParam("uuid") Long uuid) throws SelectException {
+        return ei.findExpense(uuid);
     }
 
     @GET
-    @Path("findAllExpenses")
+    @Path("findExpensesByAccount/{uuid}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> findAllExpenses() throws SelectException {
-        return ei.findAllExpenses();
-    }
-
-    @GET
-    @Path("searchAllExpensesByAccount/{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> searchAllExpensesByAccount(@PathParam("id") Long id) throws SelectException {
-        return ei.searchAllExpensesByAccount(id);
+    public List<Expense> findExpensesByAccount(@PathParam("uuid") Long uuid) throws SelectException {
+        return ei.findExpensesByAccount(uuid);
     }
 
     @GET

@@ -5,12 +5,11 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
-import model.entitys.Expense;
 import model.entitys.Punctual;
 
 /**
  *
- * @author Jason.
+ * @author Ian.
  */
 public interface PunctualInterface {
 
@@ -20,10 +19,12 @@ public interface PunctualInterface {
 
     public void deletePunctual(Punctual punctual) throws DeleteException;
 
-    public List<Expense> listAllPunctual() throws SelectException;
+    public List<Punctual> listAllPunctuals() throws SelectException;
 
-    public List<Expense> searchAllPunctualByAccount(Long id) throws SelectException;
+    public Punctual findPunctual(Long id) throws SelectException;
 
-    public List<Expense> filterPunctualByImportance(String importance) throws SelectException;
+    public List<Punctual> findPunctualsByAccount(Long id) throws SelectException;
+
+    public List<Punctual> filterPunctualByImportance(String importance) throws SelectException;
 
 }
