@@ -23,9 +23,8 @@ import model.interfaces.PunctualInterface;
  *
  * @author Jason.
  */
-@Stateless
 @Path("entitys.punctual")
-public class PunctualFacadeREST {
+public class PunctualFacadeREST extends ExpenseFacadeREST {
 
     @EJB
     private PunctualInterface pi;

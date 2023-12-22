@@ -3,7 +3,6 @@ package model.rest;
 import exceptions.SelectException;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,8 +16,7 @@ import model.interfaces.ExpenseInterface;
  *
  * @author Jason.
  */
-@Stateless
-@Path("entitys.expense")
+@Path("expense")
 public class ExpenseFacadeREST {
 
     @EJB

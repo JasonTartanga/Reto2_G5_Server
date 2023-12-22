@@ -23,7 +23,6 @@ import model.interfaces.AccountInterface;
  *
  * @author Jason.
  */
-@Stateless
 @Path("entitys.account")
 public class AccountFacadeREST {
 

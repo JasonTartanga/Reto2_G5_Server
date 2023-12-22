@@ -25,7 +25,6 @@ import model.interfaces.SharedInterface;
  *
  * @author Jason.
  */
-@Stateless
 @Path("entitys.shared")
 public class SharedFacadeREST {
 

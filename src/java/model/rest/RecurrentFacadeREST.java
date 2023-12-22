@@ -23,7 +23,6 @@ import model.interfaces.RecurrentInterface;
  *
  * @author Jason.
  */
-@Stateless
 @Path("entitys.recurrent")
 public class RecurrentFacadeREST {
 

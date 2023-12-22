@@ -23,7 +23,6 @@ import model.interfaces.UserInterface;
  *
  * @author Jason.
  */
-@Stateless
 @Path("entitys.user")
 public class UserFacadeREST {
 
@@ -68,7 +67,7 @@ public class UserFacadeREST {
     }
 
     @GET
-    @Path("find/{mail}/{passwd}")
+    @Path("loging/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
         return ui.loginUser(mail, passwd);
