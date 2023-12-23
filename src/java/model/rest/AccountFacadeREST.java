@@ -60,49 +60,49 @@ public class AccountFacadeREST {
 
     @GET
     @Path("viewAllAccounts")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> viewAllAccounts() throws SelectException {
         return ai.viewAllAccounts();
     }
 
     @GET
     @Path("searchAllAccountsByUser/{mail}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> searchAllAccountsByUser(@PathParam("mail") String mail) throws SelectException {
         return ai.searchAllAccountsByUser(mail);
     }
 
     @GET
     @Path("filterAccountsByName/{name}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsByName(@PathParam("name") String name) throws SelectException {
         return ai.filterAccountsByName(name);
     }
 
     @GET
     @Path("filterAccountsByDescription/{description}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsByDescription(@PathParam("description") String description) throws SelectException {
         return ai.filterAccountsByDescription(description);
     }
 
     @GET
     @Path("filterAccountsWithHigherBalance/{balance}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") Float balance) throws SelectException {
         return ai.filterAccountsWithHigherBalance(balance);
     }
 
     @GET
     @Path("filterAccountsWithLowerBalance/{balance}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") Float balance) throws SelectException {
         return ai.filterAccountsWithLowerBalance(balance);
     }
 
     @GET
     @Path("filterAccountsByDivisa/{divisa}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsByDivisa(@PathParam("divisa") String divisa) throws SelectException {
         return ai.filterAccountsByDivisa(divisa);
     }
