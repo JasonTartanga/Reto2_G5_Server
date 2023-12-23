@@ -31,11 +31,27 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentByPeriodicity", query = "SELECT R FROM Recurrent R WHERE R.periodicity = :periodicity"
+            name = "filterRecurrentsByName", query = "SELECT R FROM Recurrent R WHERE R.name like :name"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentByCategory", query = "SELECT R FROM Recurrent R WHERE R.category = :category"
+            name = "filterRecurrentsByConcept", query = "SELECT R FROM Recurrent R WHERE R.concept like :concept"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurrentsWithHigherAmount", query = "SELECT R FROM Recurrent R WHERE R.amount >= :amount"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurentsWithLowerAmount", query = "SELECT R FROM Recurrent R WHERE R.amount <= :amount"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurrentsByPeriodicity", query = "SELECT R FROM Recurrent R WHERE R.periodicity = :periodicity"
+    )
+    ,
+    @NamedQuery(
+            name = "filterRecurrentsByCategory", query = "SELECT R FROM Recurrent R WHERE R.category = :category"
     ),})
 @XmlRootElement
 public class Recurrent extends Expense implements Serializable {

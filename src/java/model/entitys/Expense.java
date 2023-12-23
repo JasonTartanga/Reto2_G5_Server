@@ -33,23 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     ,
     @NamedQuery(
             name = "findExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
-    )
-    ,
-    @NamedQuery(
-            name = "filterExpensesByName", query = "SELECT E FROM Expense E WHERE E.name like :name"
-    )
-    ,
-    @NamedQuery(
-            name = "filterExpensesByConcept", query = "SELECT E FROM Expense E WHERE E.concept like :concept"
-    )
-    ,
-    @NamedQuery(
-            name = "filterExpensesWithHigherAmount", query = "SELECT E FROM Expense E WHERE E.amount >= :amount"
-    )
-    ,
-    @NamedQuery(
-            name = "filterExpensesWithLowerAmount", query = "SELECT E FROM Expense E WHERE E.amount <= :amount"
-    ),})
+    ),
+})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class Expense implements Serializable {

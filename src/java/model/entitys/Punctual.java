@@ -28,8 +28,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(
             name = "findPunctualsByAccount", query = "SELECT P FROM Punctual P WHERE P.account.id = :id"
     )
+    ,
+    @NamedQuery(
+            name = "filterPunctualsByName", query = "SELECT P FROM Punctual P WHERE P.name like :name"
+    )
+    ,
+    @NamedQuery(
+            name = "filterPunctualsByConcept", query = "SELECT P FROM Punctual P WHERE P.concept like :concept"
+    )
+    ,
+    @NamedQuery(
+            name = "filterPunctualsWithHigherAmount", query = "SELECT P FROM Punctual P WHERE P.amount >= :amount"
+    )
+    ,
+    @NamedQuery(
+            name = "filterPunctualsWithLowerAmount", query = "SELECT P FROM Punctual P WHERE P.amount <= :amount"
+    )
     ,@NamedQuery(
-            name = "filterPunctualByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance"
+            name = "filterPunctualsByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance"
     ),})
 @XmlRootElement
 public class Punctual extends Expense implements Serializable {

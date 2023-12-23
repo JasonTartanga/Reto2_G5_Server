@@ -5,7 +5,9 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
+import model.entitys.Expense;
 import model.entitys.Punctual;
+import model.enums.Importance;
 
 /**
  *
@@ -25,6 +27,14 @@ public interface PunctualInterface {
 
     public List<Punctual> findPunctualsByAccount(Long id) throws SelectException;
 
-    public List<Punctual> filterPunctualByImportance(String importance) throws SelectException;
+    public List<Punctual> filterPunctualsByName(String name) throws SelectException;
+
+    public List<Punctual> filterPunctualsByConcept(String concept) throws SelectException;
+
+    public List<Punctual> filterPunctualsWithHigherAmount(String amount) throws SelectException;
+
+    public List<Punctual> filterPunctualsWithLowerAmount(String amount) throws SelectException;
+
+    public List<Punctual> filterPunctualsByImportance(Importance importance) throws SelectException;
 
 }

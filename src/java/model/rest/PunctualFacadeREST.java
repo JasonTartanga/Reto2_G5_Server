@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Punctual;
+import model.enums.Importance;
 import model.interfaces.PunctualInterface;
 
 /**
@@ -72,9 +73,37 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
     }
 
     @GET
+    @Path("filterPunctualsByName/{name}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Punctual> filterPunctualsByName(@PathParam("name") String name) throws SelectException {
+        return pi.filterPunctualsByName(name);
+    }
+
+    @GET
+    @Path("filterPunctualsByConcept/{concept}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Punctual> filterPunctualsByConcept(@PathParam("concept") String concept) throws SelectException {
+        return pi.filterPunctualsByConcept(concept);
+    }
+
+    @GET
+    @Path("filterPunctualsWithHigherAmount/{amount}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Punctual> filterPunctualsWithHigherAmount(@PathParam("amount") String amount) throws SelectException {
+        return pi.filterPunctualsWithHigherAmount(amount);
+    }
+
+    @GET
+    @Path("filterPunctualsWithLowerAmount/{amount}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Punctual> filterPunctualsWithLowerAmount(@PathParam("amount") String amount) throws SelectException {
+        return pi.filterPunctualsWithLowerAmount(amount);
+    }
+
+    @GET
     @Path("filterPunctualByImportance/{importance}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualByImportance(@PathParam("importance") String importance) throws SelectException {
-        return pi.filterPunctualByImportance(importance);
+    public List<Punctual> filterPunctualsByImportance(@PathParam("importance") Importance importance) throws SelectException {
+        return pi.filterPunctualsByImportance(importance);
     }
 }

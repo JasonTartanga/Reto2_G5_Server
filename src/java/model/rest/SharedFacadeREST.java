@@ -6,7 +6,6 @@ import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -71,15 +70,8 @@ public class SharedFacadeREST {
 
     @DELETE
     @Path("delete/{account_id}/{user_mail}")
-    public void remove(@PathParam("account_id") Long account_id, @PathParam("account_id") String user_mail) throws SelectException, DeleteException {
+    public void remove(@PathParam("account_id") Long account_id, @PathParam("user_mail") String user_mail) throws SelectException, DeleteException {
         si.deleteShared(si.findShared(account_id, user_mail));
-    }
-
-    @GET
-    @Path("findShared/{account_id}/{user_mail}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Shared findShared(@PathParam("account_id") Long account_id, @PathParam("account_id") String user_mail) throws SelectException {
-        return si.findShared(account_id, user_mail);
     }
 
     @GET
@@ -88,4 +80,12 @@ public class SharedFacadeREST {
     public List<Shared> findAll() throws SelectException {
         return si.findAllShared();
     }
+
+    @GET
+    @Path("findShared/{account_id}/{user_mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Shared findShared(@PathParam("account_id") Long account_id, @PathParam("user_mail") String user_mail) throws SelectException {
+        return si.findShared(account_id, user_mail);
+    }
+
 }

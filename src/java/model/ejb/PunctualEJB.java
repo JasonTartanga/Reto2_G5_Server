@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Punctual;
-import model.entitys.Recurrent;
+import model.enums.Importance;
 import model.interfaces.PunctualInterface;
 
 /**
@@ -88,11 +88,59 @@ public class PunctualEJB implements PunctualInterface {
     }
 
     @Override
-    public List<Punctual> filterPunctualByImportance(String importance) throws SelectException {
+    public List<Punctual> filterPunctualsByName(String name) throws SelectException {
         List<Punctual> punctuals = null;
         try {
             punctuals
-                    = em.createNamedQuery("filterPunctualByImportance").setParameter("importance", importance).getResultList();
+                    = em.createNamedQuery("filterPunctualsByName").setParameter("name", "%" + name + "%").getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return punctuals;
+    }
+
+    @Override
+    public List<Punctual> filterPunctualsByConcept(String concept) throws SelectException {
+        List<Punctual> punctuals = null;
+        try {
+            punctuals
+                    = em.createNamedQuery("filterPunctualsByConcept").setParameter("concept", "%" + concept + "%").getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return punctuals;
+    }
+
+    @Override
+    public List<Punctual> filterPunctualsWithHigherAmount(String amount) throws SelectException {
+        List<Punctual> punctuals = null;
+        try {
+            punctuals
+                    = em.createNamedQuery("filterPunctualsWithHigherAmount").setParameter("amount", amount).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return punctuals;
+    }
+
+    @Override
+    public List<Punctual> filterPunctualsWithLowerAmount(String amount) throws SelectException {
+        List<Punctual> punctuals = null;
+        try {
+            punctuals
+                    = em.createNamedQuery("filterPunctualsWithLowerAmount").setParameter("amount", amount).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return punctuals;
+    }
+
+    @Override
+    public List<Punctual> filterPunctualsByImportance(Importance importance) throws SelectException {
+        List<Punctual> punctuals = null;
+        try {
+            punctuals
+                    = em.createNamedQuery("filterPunctualsByImportance").setParameter("importance", importance).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

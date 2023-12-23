@@ -28,7 +28,7 @@ public class ExpenseFacadeREST {
 
     @GET
     @Path("listAllExpenses")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Expense> listAllExpenses() throws SelectException {
         return ei.listAllExpenses();
     }
@@ -46,33 +46,4 @@ public class ExpenseFacadeREST {
     public List<Expense> findExpensesByAccount(@PathParam("uuid") Long uuid) throws SelectException {
         return ei.findExpensesByAccount(uuid);
     }
-
-    @GET
-    @Path("filterExpensesByName/{name}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> filterExpensesByName(@PathParam("name") String name) throws SelectException {
-        return ei.filterExpensesByName(name);
-    }
-
-    @GET
-    @Path("filterExpensesByConcept/{concept}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> filterExpensesByConcept(@PathParam("concept") String concept) throws SelectException {
-        return ei.filterExpensesByConcept(concept);
-    }
-
-    @GET
-    @Path("filterExpensesWithHigherAmount/{amount}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> filterExpensesWithHigherAmount(@PathParam("amount") String amount) throws SelectException {
-        return ei.filterExpensesWithHigherAmount(amount);
-    }
-
-    @GET
-    @Path("filterExpensesWithLowerAmount/{amount}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> filterExpensesWithLowerAmount(@PathParam("amount") String amount) throws SelectException {
-        return ei.filterExpensesWithLowerAmount(amount);
-    }
-
 }

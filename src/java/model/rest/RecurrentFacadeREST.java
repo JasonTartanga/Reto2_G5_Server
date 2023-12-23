@@ -15,6 +15,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Recurrent;
+import model.enums.Category;
+import model.enums.Period;
 import model.interfaces.RecurrentInterface;
 
 /**
@@ -72,17 +74,45 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
     }
 
     @GET
+    @Path("filterRecurrentsByName/{name}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Recurrent> filterRecurrentsByName(@PathParam("name") String name) throws SelectException {
+        return ri.filterRecurrentsByName(name);
+    }
+
+    @GET
+    @Path("filterRecurrentsByConcept/{concept}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Recurrent> filterRecurrentsByConcept(@PathParam("concept") String concept) throws SelectException {
+        return ri.filterRecurrentsByConcept(concept);
+    }
+
+    @GET
+    @Path("filterRecurrentsWithHigherAmount/{amount}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Recurrent> filterRecurrentsWithHigherAmount(@PathParam("amount") String amount) throws SelectException {
+        return ri.filterRecurrentsWithHigherAmount(amount);
+    }
+
+    @GET
+    @Path("filterRecurrentsWithLowerAmount/{amount}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Recurrent> filterRecurrentsWithLowerAmount(@PathParam("amount") String amount) throws SelectException {
+        return ri.filterRecurrentsWithLowerAmount(amount);
+    }
+
+    @GET
     @Path("filterRecurrentByPeriodicity/{periodicity}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentByPeriodicity(@PathParam("periodicity") String periodicity) throws SelectException {
-        return ri.filterRecurrentByPeriodicity(periodicity);
+    public List<Recurrent> filterRecurrentByPeriodicity(@PathParam("periodicity") Period periodicity) throws SelectException {
+        return ri.filterRecurrentsByPeriodicity(periodicity);
     }
 
     @GET
     @Path("filterRecurrentByCategory/{category}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentByCategory(@PathParam("category") String category) throws SelectException {
-        return ri.filterRecurrentByCategory(category);
+    public List<Recurrent> filterRecurrentByCategory(@PathParam("category") Category category) throws SelectException {
+        return ri.filterRecurrentsByCategory(category);
     }
 
 }

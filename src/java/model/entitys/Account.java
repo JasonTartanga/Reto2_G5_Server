@@ -75,10 +75,10 @@ public class Account implements Serializable {
     @Enumerated(EnumType.STRING)
     private Plan plan;
 
-    @OneToMany(cascade = ALL, mappedBy = "account")
+    @OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
     private List<Shared> shared;
 
-    @OneToMany(cascade = ALL, mappedBy = "account")
+    @OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
     private List<Expense> expenses;
 
     //******************** GETTERS && SETTERS *********************/
