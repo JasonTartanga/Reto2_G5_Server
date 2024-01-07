@@ -1,7 +1,8 @@
 package model.enums;
 
 /**
- * This enumeration is for users profiles. Includes the values USER and ADMIN
+ * Esta clase es una enumeracion de los tipos de privilegios que puede tener un
+ * usuario.
  *
  * @author Ian.
  */

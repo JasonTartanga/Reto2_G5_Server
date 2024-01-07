@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Es la entidad Recurrent.
  *
  * @author Jason.
  */
@@ -31,27 +32,27 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentsByName", query = "SELECT R FROM Recurrent R WHERE R.name like :name"
+            name = "filterRecurrentsByName", query = "SELECT R FROM Recurrent R WHERE R.name like :name AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentsByConcept", query = "SELECT R FROM Recurrent R WHERE R.concept like :concept"
+            name = "filterRecurrentsByConcept", query = "SELECT R FROM Recurrent R WHERE R.concept like :concept AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentsWithHigherAmount", query = "SELECT R FROM Recurrent R WHERE R.amount >= :amount"
+            name = "filterRecurrentsWithHigherAmount", query = "SELECT R FROM Recurrent R WHERE R.amount >= :amount AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterRecurentsWithLowerAmount", query = "SELECT R FROM Recurrent R WHERE R.amount <= :amount"
+            name = "filterRecurrentsWithLowerAmount", query = "SELECT R FROM Recurrent R WHERE R.amount <= :amount AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentsByPeriodicity", query = "SELECT R FROM Recurrent R WHERE R.periodicity = :periodicity"
+            name = "filterRecurrentsByPeriodicity", query = "SELECT R FROM Recurrent R WHERE R.periodicity = :periodicity AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterRecurrentsByCategory", query = "SELECT R FROM Recurrent R WHERE R.category = :category"
+            name = "filterRecurrentsByCategory", query = "SELECT R FROM Recurrent R WHERE R.category = :category AND R.account.id = :id"
     ),})
 @XmlRootElement
 public class Recurrent extends Expense implements Serializable {

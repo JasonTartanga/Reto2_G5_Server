@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Es la entidad que permite la union ManyToMany entre User y Account.
  *
  * @author Jason, Jessica.
  */

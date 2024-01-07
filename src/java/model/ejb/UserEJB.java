@@ -12,6 +12,7 @@ import model.entitys.User;
 import model.interfaces.UserInterface;
 
 /**
+ * Es el EJB de la entidad User.
  *
  * @author Ian.
  */
@@ -21,6 +22,13 @@ public class UserEJB implements UserInterface {
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
 
+    /**
+     * Crea un usuario en la base de datos.
+     *
+     * @param user el usuario que se va a guardar.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @Override
     public void createUser(User user) throws CreateException {
         try {
@@ -30,6 +38,13 @@ public class UserEJB implements UserInterface {
         }
     }
 
+    /**
+     * Modifica un usuario de la base de datos.
+     *
+     * @param user el usuario que se va a modificar.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @Override
     public void updateUser(User user) throws UpdateException {
         try {
@@ -42,6 +57,13 @@ public class UserEJB implements UserInterface {
         }
     }
 
+    /**
+     * Elimina un usuario de la base de datos.
+     *
+     * @param user el usuario que se va a eliminar.
+     * @throws DeleteException gestiona una excepcion a la hora de eliminar
+     * entidades.
+     */
     @Override
     public void deleteUser(User user) throws DeleteException {
         try {
@@ -51,6 +73,14 @@ public class UserEJB implements UserInterface {
         }
     }
 
+    /**
+     * Busca un usuario por su mail.
+     *
+     * @param mail el identificador unico del usuario.
+     * @return todos los datos del usuario.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @Override
     public User findUser(String mail) throws SelectException {
         User u = null;
@@ -62,6 +92,13 @@ public class UserEJB implements UserInterface {
         return u;
     }
 
+    /**
+     * Busca todos los usuario de la base de datos.
+     *
+     * @return todos los usuarios.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @Override
     public List<User> viewAllUser() throws SelectException {
         List<User> users = null;
@@ -74,6 +111,16 @@ public class UserEJB implements UserInterface {
         return users;
     }
 
+    /**
+     * Mira en la base de datos si un usuario contiene el mail y la contraseña,
+     * si coinciden devuelve el todos datos del usuario, si no devuelve null
+     *
+     * @param mail el identificador unico del usuario.
+     * @param passwd la contraseña del usuario.
+     * @return todos los datos del usuario o null.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @Override
     public User loginUser(String mail, String passwd) throws SelectException {
         User u = null;

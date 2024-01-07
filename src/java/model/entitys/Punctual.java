@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Es la entidad Punctual.
  *
  * @author Ian.
  */
@@ -30,22 +31,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     )
     ,
     @NamedQuery(
-            name = "filterPunctualsByName", query = "SELECT P FROM Punctual P WHERE P.name like :name"
+            name = "filterPunctualsByName", query = "SELECT P FROM Punctual P WHERE P.name like :name AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterPunctualsByConcept", query = "SELECT P FROM Punctual P WHERE P.concept like :concept"
+            name = "filterPunctualsByConcept", query = "SELECT P FROM Punctual P WHERE P.concept like :concept AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterPunctualsWithHigherAmount", query = "SELECT P FROM Punctual P WHERE P.amount >= :amount"
+            name = "filterPunctualsWithHigherAmount", query = "SELECT P FROM Punctual P WHERE P.amount >= :amount AND R.account.id = :id"
     )
     ,
     @NamedQuery(
-            name = "filterPunctualsWithLowerAmount", query = "SELECT P FROM Punctual P WHERE P.amount <= :amount"
+            name = "filterPunctualsWithLowerAmount", query = "SELECT P FROM Punctual P WHERE P.amount <= :amount AND R.account.id = :id"
     )
     ,@NamedQuery(
-            name = "filterPunctualsByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance"
+            name = "filterPunctualsByImportance", query = "SELECT P FROM Punctual P WHERE P.importance = :importance AND R.account.id = :id"
     ),})
 @XmlRootElement
 public class Punctual extends Expense implements Serializable {

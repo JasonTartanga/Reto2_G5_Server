@@ -12,6 +12,7 @@ import model.entitys.Shared;
 import model.interfaces.SharedInterface;
 
 /**
+ * El EJB de la entidad Shared.
  *
  * @author Jason, Jessica.
  */
@@ -21,6 +22,13 @@ public class SharedEJB implements SharedInterface {
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
 
+    /**
+     * Crea un Shared en la base de datos.
+     *
+     * @param shared el Shared que se va a guardar.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @Override
     public void createShared(Shared shared) throws CreateException {
         try {
@@ -30,6 +38,13 @@ public class SharedEJB implements SharedInterface {
         }
     }
 
+    /**
+     * Modifica un Shared de la base de datos.
+     *
+     * @param shared los datos del Shared que se va a modificar.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @Override
     public void updateShared(Shared shared) throws UpdateException {
         try {
@@ -42,6 +57,13 @@ public class SharedEJB implements SharedInterface {
         }
     }
 
+    /**
+     * Elimina un Shared de la base de datos.
+     *
+     * @param shared
+     * @throws DeleteException gestiona una excepcion a la hora de eliminar
+     * entidades.
+     */
     @Override
     public void deleteShared(Shared shared) throws DeleteException {
         try {
@@ -51,6 +73,15 @@ public class SharedEJB implements SharedInterface {
         }
     }
 
+    /**
+     * Busca un Shared en la base de datos.
+     *
+     * @param account_id el identificado unico del Account.
+     * @param mail el identificador unico del User.
+     * @return todos los datos del Shared.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @Override
     public Shared findShared(Long account_id, String mail) throws SelectException {
         Shared s = null;
@@ -64,6 +95,13 @@ public class SharedEJB implements SharedInterface {
         return s;
     }
 
+    /**
+     * Busca todos los Shared de la base de datos.
+     *
+     * @return todos los Shared y sus datos.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @Override
     public List<Shared> findAllShared() throws SelectException {
         List<Shared> shareds = null;

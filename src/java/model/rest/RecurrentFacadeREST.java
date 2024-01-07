@@ -21,6 +21,7 @@ import model.enums.Period;
 import model.interfaces.RecurrentInterface;
 
 /**
+ * Es el FacadeRESTful de la entidad Recurrent.
  *
  * @author Jason.
  */
@@ -34,25 +35,55 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
 
     }
 
+    /**
+     * Llama al metodo createRecurrent del EJB mediante la interfaz.
+     *
+     * @param recurrent el parametro necesario para el EJB.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createRecurrent(Recurrent recurrent) throws CreateException {
         ri.createRecurrent(recurrent);
     }
 
+    /**
+     * Llama al metodo updateRecurrent del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @param recurrent el parametro necesario para el EJB.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @PUT
-    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateRecurrent(Recurrent recurrent) throws UpdateException {
+    public void updateRecurrent(@PathParam("uuid") Long uuid, Recurrent recurrent) throws UpdateException {
         ri.updateRecurrent(recurrent);
     }
 
+    /**
+     * Llama al metodo deleteRecurrent del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @throws DeleteException gestiona una excepcion a la hora de eliminar
+     * entidades.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @DELETE
-    @Path("delete/{uuid}")
+    @Path("deleteRecurrent/{uuid}")
     public void deleteRecurrent(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
         ri.deleteRecurrent(ri.findRecurrent(uuid));
     }
 
+    /**
+     * Llama al metodo listAllRecurrents del EJB mediante la interfaz.
+     *
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("listAllRecurrents")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -60,6 +91,14 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
         return ri.listAllRecurrents();
     }
 
+    /**
+     * Llama al metodo findRecurrent del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findRecurrent/{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -67,6 +106,14 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
         return ri.findRecurrent(uuid);
     }
 
+    /**
+     * Llama al metodo findRecurrentsByAccount del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findRecurrentsByAccount/{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -74,46 +121,103 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
         return ri.findRecurrentsByAccount(uuid);
     }
 
+    /**
+     * Llama al metodo filterRecurrentsByName del EJB mediante la interfaz.
+     *
+     * @param name el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentsByName/{name}")
+    @Path("filterRecurrentsByName/{name}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentsByName(@PathParam("name") String name) throws SelectException {
-        return ri.filterRecurrentsByName(name);
+    public List<Recurrent> filterRecurrentsByName(@PathParam("name") String name, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsByName(name, account_id);
     }
 
+    /**
+     * Llama al metodo filterRecurrentsByConcept del EJB mediante la interfaz.
+     *
+     * @param concept el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentsByConcept/{concept}")
+    @Path("filterRecurrentsByConcept/{concept}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentsByConcept(@PathParam("concept") String concept) throws SelectException {
-        return ri.filterRecurrentsByConcept(concept);
+    public List<Recurrent> filterRecurrentsByConcept(@PathParam("concept") String concept, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsByConcept(concept, account_id);
     }
 
+    /**
+     * Llama al metodo filterRecurrentsWithHigherAmount del EJB mediante la
+     * interfaz.
+     *
+     * @param amount el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentsWithHigherAmount/{amount}")
+    @Path("filterRecurrentsWithHigherAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentsWithHigherAmount(@PathParam("amount") String amount) throws SelectException {
-        return ri.filterRecurrentsWithHigherAmount(amount);
+    public List<Recurrent> filterRecurrentsWithHigherAmount(@PathParam("amount") Float amount, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsWithHigherAmount(amount, account_id);
     }
 
+    /**
+     * Llama al metodo filterRecurrentsWithLowerAmount del EJB mediante la
+     * interfaz.
+     *
+     * @param amount el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentsWithLowerAmount/{amount}")
+    @Path("filterRecurrentsWithLowerAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentsWithLowerAmount(@PathParam("amount") String amount) throws SelectException {
-        return ri.filterRecurrentsWithLowerAmount(amount);
+    public List<Recurrent> filterRecurrentsWithLowerAmount(@PathParam("amount") Float amount, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsWithLowerAmount(amount, account_id);
     }
 
+    /**
+     * Llama al metodo filterRecurrentByPeriodicity del EJB mediante la
+     * interfaz.
+     *
+     * @param periodicity el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentByPeriodicity/{periodicity}")
+    @Path("filterRecurrentsByPeriodicity/{periodicity}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentByPeriodicity(@PathParam("periodicity") Period periodicity) throws SelectException {
-        return ri.filterRecurrentsByPeriodicity(periodicity);
+    public List<Recurrent> filterRecurrentByPeriodicity(@PathParam("periodicity") Period periodicity, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsByPeriodicity(periodicity, account_id);
     }
 
+    /**
+     * Llama al metodo filterRecurrentByCategory del EJB mediante la interfaz.
+     *
+     * @param category el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterRecurrentByCategory/{category}")
+    @Path("filterRecurrentsByCategory/{category}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Recurrent> filterRecurrentByCategory(@PathParam("category") Category category) throws SelectException {
-        return ri.filterRecurrentsByCategory(category);
+    public List<Recurrent> filterRecurrentByCategory(@PathParam("category") Category category, @PathParam("account_id") Long account_id) throws SelectException {
+        return ri.filterRecurrentsByCategory(category, account_id);
     }
 
 }

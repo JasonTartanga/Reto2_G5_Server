@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 /**
+ * Esta clase es para hacer el EmbeddableId de Shared.
  *
  * @author Jason, Jessica.
  */

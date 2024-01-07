@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * Es la entidad Account.
  *
  * @author Jessica.
  */
@@ -32,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     )
     ,
    @NamedQuery(
-            name = "searchAllAccountsByUser", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail"
+            name = "findAllAccountsByUser", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail"
     )
     ,
         @NamedQuery(

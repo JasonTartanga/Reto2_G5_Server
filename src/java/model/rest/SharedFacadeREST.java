@@ -21,6 +21,7 @@ import model.entitys.SharedId;
 import model.interfaces.SharedInterface;
 
 /**
+ * Es el FacadeRESTful de la entidad Shared.
  *
  * @author Jason, Jessica.
  */
@@ -55,12 +56,27 @@ public class SharedFacadeREST {
 
     }
 
+    /**
+     * Llama al metodo createShared del EJB mediante la interfaz.
+     *
+     * @param shared el parametro necesario para el EJB.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Shared shared) throws CreateException {
         si.createShared(shared);
     }
 
+    /**
+     * Llama al metodo updateShared del EJB mediante la interfaz.
+     *
+     * @param id el parametro necesario para el EJB.
+     * @param shared el parametro necesario para el EJB.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @PUT
     @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -68,12 +84,29 @@ public class SharedFacadeREST {
         si.updateShared(shared);
     }
 
+    /**
+     * Llama al metodo deleteShared del EJB mediante la interfaz.
+     *
+     * @param account_id el parametro necesario para el EJB.
+     * @param user_mail el parametro necesario para el EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     * @throws DeleteException gestiona una excepcion a la hora de elimiar
+     * entidades.
+     */
     @DELETE
     @Path("delete/{account_id}/{user_mail}")
     public void remove(@PathParam("account_id") Long account_id, @PathParam("user_mail") String user_mail) throws SelectException, DeleteException {
         si.deleteShared(si.findShared(account_id, user_mail));
     }
 
+    /**
+     * Llama al metodo findAllShared del EJB mediante la interfaz.
+     *
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findAllShareds")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -81,6 +114,15 @@ public class SharedFacadeREST {
         return si.findAllShared();
     }
 
+    /**
+     * Llama al metodo findShared del EJB mediante la interfaz.
+     *
+     * @param account_id el parametro necesario para el EJB.
+     * @param user_mail el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findShared/{account_id}/{user_mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

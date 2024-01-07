@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Es la entidad Expense.
  *
  * @author Jason, Ian.
  */
@@ -33,8 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     ,
     @NamedQuery(
             name = "findExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
-    ),
-})
+    ),})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
 public class Expense implements Serializable {

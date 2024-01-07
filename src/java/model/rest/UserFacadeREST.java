@@ -19,6 +19,7 @@ import model.entitys.User;
 import model.interfaces.UserInterface;
 
 /**
+ * Es el FacadeRESTful de la entidad User.
  *
  * @author Ian.
  */
@@ -32,12 +33,27 @@ public class UserFacadeREST {
 
     }
 
+    /**
+     * Llama al metodo createUser del EJB mediante la interfaz.
+     *
+     * @param user el parametro necesario para el EJB.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createUser(User user) throws CreateException {
         ui.createUser(user);
     }
 
+    /**
+     * Llama al metodo updateUser del EJB mediante la interfaz.
+     *
+     * @param mail el parametro necesario para el EJB.
+     * @param user el parametro necesario para el EJB.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @PUT
     @Path("update/{mail}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -45,12 +61,29 @@ public class UserFacadeREST {
         ui.updateUser(user);
     }
 
+    /**
+     * Llama al metodo deleteUser del EJB mediante la interfaz.
+     *
+     * @param mail el parametro necesario para el EJB.
+     * @throws DeleteException gestiona una excepcion a la hora de eliminar
+     * entidades.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @DELETE
     @Path("delete/{mail}")
     public void deleteUser(@PathParam("mail") String mail) throws DeleteException, SelectException {
         ui.deleteUser(ui.findUser(mail));
     }
 
+    /**
+     * Llama al metodo findUser del EJB mediante la interfaz.
+     *
+     * @param mail el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("find/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -58,6 +91,13 @@ public class UserFacadeREST {
         return ui.findUser(mail);
     }
 
+    /**
+     * Llama al metodo viewAllUser del EJB mediante la interfaz.
+     *
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findAllUsers")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -65,8 +105,17 @@ public class UserFacadeREST {
         return ui.viewAllUser();
     }
 
+    /**
+     * Llama al metodo loginUser del EJB mediante la interfaz.
+     *
+     * @param mail el parametro necesario para el EJB.
+     * @param passwd el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("loging/{mail}/{passwd}")
+    @Path("login/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
         return ui.loginUser(mail, passwd);

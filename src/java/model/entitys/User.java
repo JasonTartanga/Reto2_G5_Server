@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * Es la entidad de usuario.
+ *
  * @author Ian.
  */
 @Entity

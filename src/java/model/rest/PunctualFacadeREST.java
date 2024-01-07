@@ -20,6 +20,7 @@ import model.enums.Importance;
 import model.interfaces.PunctualInterface;
 
 /**
+ * Es el FacadeRESTful de la entidad Punctual.
  *
  * @author Ian.
  */
@@ -33,25 +34,54 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
 
     }
 
+    /**
+     * Llama al metodo createPunctual del EJB mediante la interfaz.
+     *
+     * @param punctual el parametro necesario para el EJB.
+     * @throws CreateException gestiona una excepcion a la hora de crear
+     * entidades.
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createPunctual(Punctual punctual) throws CreateException {
         pi.createPunctual(punctual);
     }
 
+    /**
+     * Llama al metodo updatePunctual del EJB mediante la interfaz.
+     *
+     * @param punctual el parametro necesario para el EJB.
+     * @throws UpdateException gestiona una excepcion a la hora de modificar
+     * entidades.
+     */
     @PUT
-    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void updatePunctual(Punctual punctual) throws UpdateException {
         pi.updatePunctual(punctual);
     }
 
+    /**
+     * Llama al metodo deletePunctual del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @throws DeleteException gestiona una excepcion a la hora de eliminar
+     * entidades.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @DELETE
     @Path("delete/{uuid}")
     public void deletePunctual(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
         pi.deletePunctual(pi.findPunctual(uuid));
     }
 
+    /**
+     * Llama al metodo listAllPunctual del EJB mediante la interfaz.
+     *
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("listAllPunctual")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -59,6 +89,14 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
         return pi.listAllPunctuals();
     }
 
+    /**
+     * Llama al metodo findPunctual del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findPunctual/{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -66,6 +104,14 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
         return pi.findPunctual(uuid);
     }
 
+    /**
+     * Llama al metodo findPunctualsByAccount del EJB mediante la interfaz.
+     *
+     * @param uuid el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
     @Path("findPunctualsByAccount/{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -73,38 +119,85 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
         return pi.findPunctualsByAccount(uuid);
     }
 
+    /**
+     * Llama al metodo filterPunctualsByName del EJB mediante la interfaz.
+     *
+     * @param name el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterPunctualsByName/{name}")
+    @Path("filterPunctualsByName/{name}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsByName(@PathParam("name") String name) throws SelectException {
-        return pi.filterPunctualsByName(name);
+    public List<Punctual> filterPunctualsByName(@PathParam("name") String name, @PathParam("account_id") Long account_id) throws SelectException {
+        return pi.filterPunctualsByName(name, account_id);
     }
 
+    /**
+     * Llama al metodo filterPunctualsByConcept del EJB mediante la interfaz.
+     *
+     * @param concept el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterPunctualsByConcept/{concept}")
+    @Path("filterPunctualsByConcept/{concept}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsByConcept(@PathParam("concept") String concept) throws SelectException {
-        return pi.filterPunctualsByConcept(concept);
+    public List<Punctual> filterPunctualsByConcept(@PathParam("concept") String concept, @PathParam("account_id") Long account_id) throws SelectException {
+        return pi.filterPunctualsByConcept(concept, account_id);
     }
 
+    /**
+     * Llama al metodo filterPunctualsWithHigherAmount del EJB mediante la
+     * interfaz.
+     *
+     * @param amount el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterPunctualsWithHigherAmount/{amount}")
+    @Path("filterPunctualsWithHigherAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsWithHigherAmount(@PathParam("amount") String amount) throws SelectException {
-        return pi.filterPunctualsWithHigherAmount(amount);
+    public List<Punctual> filterPunctualsWithHigherAmount(@PathParam("amount") String amount, @PathParam("account_id") Long account_id) throws SelectException {
+        return pi.filterPunctualsWithHigherAmount(amount, account_id);
     }
 
+    /**
+     * Llama al metodo filterPunctualsWithLowerAmount del EJB mediante la
+     * interfaz.
+     *
+     * @param amount el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterPunctualsWithLowerAmount/{amount}")
+    @Path("filterPunctualsWithLowerAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsWithLowerAmount(@PathParam("amount") String amount) throws SelectException {
-        return pi.filterPunctualsWithLowerAmount(amount);
+    public List<Punctual> filterPunctualsWithLowerAmount(@PathParam("amount") String amount, @PathParam("account_id") Long account_id) throws SelectException {
+        return pi.filterPunctualsWithLowerAmount(amount, account_id);
     }
 
+    /**
+     * Llama al metodo filterPunctualsByImportance del EJB mediante la interfaz.
+     *
+     * @param importance el parametro necesario para el EJB.
+     * @param account_id el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
     @GET
-    @Path("filterPunctualByImportance/{importance}")
+    @Path("filterPunctualByImportance/{importance}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsByImportance(@PathParam("importance") Importance importance) throws SelectException {
-        return pi.filterPunctualsByImportance(importance);
+    public List<Punctual> filterPunctualsByImportance(@PathParam("importance") Importance importance, @PathParam("account_id") Long account_id) throws SelectException {
+        return pi.filterPunctualsByImportance(importance, account_id);
     }
 }
