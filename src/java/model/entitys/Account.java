@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Es la entidad Account.
+ * Es la entidad llamada Account.
  *
  * @author Jessica.
  */
