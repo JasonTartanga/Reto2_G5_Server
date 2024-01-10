@@ -69,7 +69,7 @@ public class AccountFacadeREST {
      * entidades.
      */
     @DELETE
-    @Path("delete/{id}")
+    @Path("{id}")
     public void deleteAccount(@PathParam("id") Long id) throws DeleteException, SelectException {
         ai.deleteAccount(ai.findAccount(id));
     }
@@ -83,9 +83,9 @@ public class AccountFacadeREST {
      * entidades.
      */
     @GET
-    @Path("find/{id}")
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Account find(@PathParam("id") Long id) throws SelectException {
+    public Account findAccount(@PathParam("id") Long id) throws SelectException {
         return ai.findAccount(id);
     }
 
@@ -97,7 +97,6 @@ public class AccountFacadeREST {
      * entidades.
      */
     @GET
-    @Path("viewAllAccounts")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> viewAllAccounts() throws SelectException {
         return ai.viewAllAccounts();

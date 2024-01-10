@@ -55,7 +55,6 @@ public class UserFacadeREST {
      * entidades.
      */
     @PUT
-    @Path("update/{mail}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void updateUser(@PathParam("mail") String mail, User user) throws UpdateException {
         ui.updateUser(user);
@@ -71,7 +70,7 @@ public class UserFacadeREST {
      * entidades.
      */
     @DELETE
-    @Path("delete/{mail}")
+    @Path("{mail}")
     public void deleteUser(@PathParam("mail") String mail) throws DeleteException, SelectException {
         ui.deleteUser(ui.findUser(mail));
     }
@@ -85,9 +84,9 @@ public class UserFacadeREST {
      * entidades.
      */
     @GET
-    @Path("find/{mail}")
+    @Path("{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User find(@PathParam("mail") String mail) throws SelectException {
+    public User findUser(@PathParam("mail") String mail) throws SelectException {
         return ui.findUser(mail);
     }
 
@@ -99,7 +98,6 @@ public class UserFacadeREST {
      * entidades.
      */
     @GET
-    @Path("findAllUsers")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<User> findAllUsers() throws SelectException {
         return ui.viewAllUser();

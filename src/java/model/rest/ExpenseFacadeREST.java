@@ -33,13 +33,11 @@ public class ExpenseFacadeREST {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    @GET
-    @Path("listAllExpenses")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> listAllExpenses() throws SelectException {
-        return ei.listAllExpenses();
-    }
-
+//    @GET
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List<Expense> listAllExpenses() throws SelectException {
+//        return ei.listAllExpenses();
+//    }
     /**
      * Llama al metodo findExpense del EJB mediante la interfaz.
      *
@@ -48,13 +46,12 @@ public class ExpenseFacadeREST {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    @GET
-    @Path("findExpense/{uuid}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Expense findExpense(@PathParam("uuid") Long uuid) throws SelectException {
-        return ei.findExpense(uuid);
-    }
-
+//    @GET
+//    @Path("{id}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public Expense findExpense(@PathParam("id") Long uuid) throws SelectException {
+//        return ei.findExpense(uuid);
+//    }
     /**
      * Llama al metodo findExpensesByAccount del EJB mediante la interfaz.
      *

@@ -78,7 +78,6 @@ public class SharedFacadeREST {
      * entidades.
      */
     @PUT
-    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") PathSegment id, Shared shared) throws UpdateException {
         si.updateShared(shared);
@@ -95,7 +94,7 @@ public class SharedFacadeREST {
      * entidades.
      */
     @DELETE
-    @Path("delete/{account_id}/{user_mail}")
+    @Path("{account_id}/{user_mail}")
     public void remove(@PathParam("account_id") Long account_id, @PathParam("user_mail") String user_mail) throws SelectException, DeleteException {
         si.deleteShared(si.findShared(account_id, user_mail));
     }
@@ -108,7 +107,6 @@ public class SharedFacadeREST {
      * entidades.
      */
     @GET
-    @Path("findAllShareds")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Shared> findAll() throws SelectException {
         return si.findAllShared();
@@ -124,7 +122,7 @@ public class SharedFacadeREST {
      * entidades.
      */
     @GET
-    @Path("findShared/{account_id}/{user_mail}")
+    @Path("{account_id}/{user_mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Shared findShared(@PathParam("account_id") Long account_id, @PathParam("user_mail") String user_mail) throws SelectException {
         return si.findShared(account_id, user_mail);

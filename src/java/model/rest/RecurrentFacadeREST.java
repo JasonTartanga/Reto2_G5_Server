@@ -72,7 +72,7 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @DELETE
-    @Path("deleteRecurrent/{uuid}")
+    @Path("{uuid}")
     public void deleteRecurrent(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
         ri.deleteRecurrent(ri.findRecurrent(uuid));
     }
@@ -85,7 +85,6 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @GET
-    @Path("listAllRecurrents")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Recurrent> listAllRecurrents() throws SelectException {
         return ri.listAllRecurrents();
@@ -100,7 +99,7 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @GET
-    @Path("findRecurrent/{uuid}")
+    @Path("{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Recurrent findRecurrent(@PathParam("uuid") Long uuid) throws SelectException {
         return ri.findRecurrent(uuid);

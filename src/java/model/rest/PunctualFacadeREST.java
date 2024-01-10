@@ -70,7 +70,7 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @DELETE
-    @Path("delete/{uuid}")
+    @Path("{uuid}")
     public void deletePunctual(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
         pi.deletePunctual(pi.findPunctual(uuid));
     }
@@ -83,7 +83,6 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @GET
-    @Path("listAllPunctual")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Punctual> listAllPunctual() throws SelectException {
         return pi.listAllPunctuals();
@@ -98,7 +97,7 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @GET
-    @Path("findPunctual/{uuid}")
+    @Path("{uuid}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Punctual findPunctual(@PathParam("uuid") Long uuid) throws SelectException {
         return pi.findPunctual(uuid);

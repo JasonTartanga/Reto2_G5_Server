@@ -1,5 +1,6 @@
 package model.interfaces;
 
+import exceptions.DeleteException;
 import exceptions.SelectException;
 import java.util.List;
 import model.entitys.Expense;
