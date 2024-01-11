@@ -1,7 +1,9 @@
 package model.interfaces;
 
+import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
 import model.entitys.Expense;
 
@@ -11,6 +13,14 @@ import model.entitys.Expense;
  * @author Jason, Ian.
  */
 public interface ExpenseInterface {
+
+    public void createExpense(Expense expense) throws CreateException;
+
+    public void updateExpense(Expense expense) throws UpdateException;
+
+    public void deleteExpense(Expense expense) throws DeleteException;
+
+    public Expense findExpense(Long id) throws SelectException;
 
     /**
      * Busca todos los Expense que hay en la base de datos.
@@ -29,8 +39,6 @@ public interface ExpenseInterface {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public Expense findExpense(Long id) throws SelectException;
-
     /**
      * Busca todos los Expenses que tenga un Account.
      *

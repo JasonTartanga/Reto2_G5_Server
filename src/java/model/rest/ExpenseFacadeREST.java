@@ -16,7 +16,7 @@ import model.interfaces.ExpenseInterface;
  *
  * @author Jason, Jessica.
  */
-@Path("expense")
+@Path("entitys.expense")
 public class ExpenseFacadeREST {
 
     @EJB
@@ -26,6 +26,23 @@ public class ExpenseFacadeREST {
 
     }
 
+//    @POST
+//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public void createRecurrent(Expense expense) throws CreateException {
+//        ei.createExpense(expense);
+//    }
+//
+//    @PUT
+//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public void updateRecurrent(@PathParam("uuid") Long uuid, Expense expense) throws UpdateException {
+//        ei.updateExpense(expense);
+//    }
+//
+//    @DELETE
+//    @Path("{uuid}")
+//    public void deleteExpense(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
+//        ei.deleteExpense(ei.findExpense(uuid));
+//    }
     /**
      * Llama al metodo listAllExpenses del EJB mediante la interfaz.
      *
@@ -47,9 +64,9 @@ public class ExpenseFacadeREST {
      * entidades.
      */
 //    @GET
-//    @Path("{id}")
+//    @Path("{uuid}")
 //    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public Expense findExpense(@PathParam("id") Long uuid) throws SelectException {
+//    public Expense findExpense(@PathParam("uuid") Long uuid) throws SelectException {
 //        return ei.findExpense(uuid);
 //    }
     /**

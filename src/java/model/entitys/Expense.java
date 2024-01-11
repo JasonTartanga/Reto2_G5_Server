@@ -2,6 +2,7 @@ package model.entitys;
 
 import java.io.Serializable;
 import java.util.Date;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Es la entidad Expense.
@@ -48,8 +51,6 @@ public class Expense implements Serializable {
     private String name;
     private String concept;
     private float amount;
-    private float totalPuntual;
-    private float totalRecurrente;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -106,22 +107,6 @@ public class Expense implements Serializable {
         this.account = group;
     }
 
-    public float getTotalPuntual() {
-        return totalPuntual;
-    }
-
-    public void setTotalPuntual(float totalPuntual) {
-        this.totalPuntual = totalPuntual;
-    }
-
-    public float getTotalRecurrente() {
-        return totalRecurrente;
-    }
-
-    public void setTotalRecurrente(float totalRecurrente) {
-        this.totalRecurrente = totalRecurrente;
-    }
-
     //******************** METODOS *********************/
     @Override
     public int hashCode() {
@@ -145,7 +130,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        return "Expense{" + "uuid=" + uuid + ", name=" + name + ", concept=" + concept + ", amount=" + amount + ", totalPuntual=" + totalPuntual + ", totalRecurrente=" + totalRecurrente + ", date=" + date + ", account=" + account + '}';
+        return "Expense{" + "uuid=" + uuid + ", name=" + name + ", concept=" + concept + ", amount=" + amount + ", date=" + date + ", account=" + account + '}';
     }
 
 }

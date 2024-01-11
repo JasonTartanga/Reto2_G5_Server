@@ -5,6 +5,7 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +24,7 @@ public class RecurrentEJB implements RecurrentInterface {
 
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
+    private static final Logger log = Logger.getLogger(RecurrentEJB.class.getName());
 
     /**
      * Crea un Recurrent en la base de datos.
@@ -69,6 +71,10 @@ public class RecurrentEJB implements RecurrentInterface {
     @Override
     public void deleteRecurrent(Recurrent recurrent) throws DeleteException {
         try {
+            log.warning("Delete Recurrent --> " + recurrent.getUuid());
+
+            //  recurrent.setAccount(null);
+            //  this.updateRecurrent(recurrent);
             em.remove(em.merge(recurrent));
         } catch (Exception e) {
             throw new DeleteException(e.getMessage());

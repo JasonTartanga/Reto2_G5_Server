@@ -1,11 +1,16 @@
 package model.ejb;
 
+import exceptions.CreateException;
+import exceptions.DeleteException;
 import exceptions.SelectException;
+import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Expense;
+import model.entitys.Recurrent;
 import model.interfaces.ExpenseInterface;
 
 /**
@@ -18,6 +23,39 @@ public class ExpenseEJB implements ExpenseInterface {
 
     @PersistenceContext(unitName = "Reto2_G5_ServerPU")
     private EntityManager em;
+
+    private static final Logger log = Logger.getLogger(ExpenseEJB.class.getName());
+
+    @Override
+    public void createExpense(Expense expense) throws CreateException {
+        try {
+            em.persist(expense);
+        } catch (Exception e) {
+            throw new CreateException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateExpense(Expense expense) throws UpdateException {
+        try {
+            if (!em.contains(expense)) {
+                em.merge(expense);
+            }
+            em.flush();
+        } catch (Exception e) {
+            throw new UpdateException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteExpense(Expense expense) throws DeleteException {
+        log.warning("Delete Expense --> " + expense.getUuid());
+        try {
+            em.remove(em.merge(expense));
+        } catch (Exception e) {
+            throw new DeleteException(e.getMessage());
+        }
+    }
 
     /**
      * Busca todos los Expense que hay en la base de datos.
