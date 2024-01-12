@@ -55,6 +55,7 @@ public class UserFacadeREST {
      * entidades.
      */
     @PUT
+    @Path("{mail}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void updateUser(@PathParam("mail") String mail, User user) throws UpdateException {
         ui.updateUser(user);

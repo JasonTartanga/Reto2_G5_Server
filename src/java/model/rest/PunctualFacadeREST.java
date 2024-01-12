@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Punctual;
+import model.entitys.Recurrent;
 import model.enums.Importance;
 import model.interfaces.PunctualInterface;
 
@@ -50,13 +51,15 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
     /**
      * Llama al metodo updatePunctual del EJB mediante la interfaz.
      *
+     * @param uuid el parametro necesario para el EJB
      * @param punctual el parametro necesario para el EJB.
      * @throws UpdateException gestiona una excepcion a la hora de modificar
      * entidades.
      */
     @PUT
+    @Path("{uuid}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updatePunctual(Punctual punctual) throws UpdateException {
+    public void updateRecurrent(@PathParam("uuid") Long uuid, Punctual punctual) throws UpdateException {
         pi.updatePunctual(punctual);
     }
 

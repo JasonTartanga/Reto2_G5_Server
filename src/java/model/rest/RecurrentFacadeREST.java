@@ -5,6 +5,8 @@ import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -57,6 +59,7 @@ public class RecurrentFacadeREST extends ExpenseFacadeREST {
      * entidades.
      */
     @PUT
+    @Path("{uuid}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void updateRecurrent(@PathParam("uuid") Long uuid, Recurrent recurrent) throws UpdateException {
         ri.updateRecurrent(recurrent);

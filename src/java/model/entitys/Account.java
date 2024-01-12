@@ -4,7 +4,6 @@ import model.enums.Plan;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -80,7 +79,7 @@ public class Account implements Serializable {
     @OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
     private List<Shared> shared;
 
-    @OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
+    @OneToMany(mappedBy = "account", orphanRemoval = true)
     private List<Expense> expenses;
 
     //******************** GETTERS && SETTERS *********************/

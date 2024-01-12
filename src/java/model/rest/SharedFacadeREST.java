@@ -78,6 +78,7 @@ public class SharedFacadeREST {
      * entidades.
      */
     @PUT
+    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") PathSegment id, Shared shared) throws UpdateException {
         si.updateShared(shared);
