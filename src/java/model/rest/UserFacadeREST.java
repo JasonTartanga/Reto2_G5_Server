@@ -1,5 +1,6 @@
 package model.rest;
 
+import cipher.Asimetric;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
@@ -117,6 +118,12 @@ public class UserFacadeREST {
     @Path("login/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
+        System.out.println("Login --> mail: " + mail + " passwd: " + passwd);
+
+        passwd = Asimetric.decipherPasswd(passwd);
+        System.out.println("Passwd descifrada --> " + passwd);
+
+        System.out.println(ui.loginUser(mail, passwd).toString());
         return ui.loginUser(mail, passwd);
     }
 }
