@@ -26,14 +26,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(
             name = "listAllExpenses", query = "SELECT E FROM Expense E"
-    )
-    ,
-    @NamedQuery(
-            name = "findExpense", query = "SELECT E FROM Expense E WHERE E.uuid = :uuid"
-    )
-    ,
-    @NamedQuery(
-            name = "findExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id = :id"
     ),})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement

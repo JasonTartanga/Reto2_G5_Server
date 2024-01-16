@@ -26,61 +26,15 @@ public class ExpenseFacadeREST {
 
     }
 
-//    @POST
-//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void createRecurrent(Expense expense) throws CreateException {
-//        ei.createExpense(expense);
-//    }
-//
-//    @PUT
-//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void updateRecurrent(@PathParam("uuid") Long uuid, Expense expense) throws UpdateException {
-//        ei.updateExpense(expense);
-//    }
-//
-//    @DELETE
-//    @Path("{uuid}")
-//    public void deleteExpense(@PathParam("uuid") Long uuid) throws DeleteException, SelectException {
-//        ei.deleteExpense(ei.findExpense(uuid));
-//    }
     /**
-     * Llama al metodo listAllExpenses del EJB mediante la interfaz.
+     * Busca la cantidad de Expenses que hay.
      *
-     * @return lo que devuelva el metodo del EJB.
-     * @throws SelectException gestiona una excepcion a la hora de buscar
-     * entidades.
-     */
-//    @GET
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public List<Expense> listAllExpenses() throws SelectException {
-//        return ei.listAllExpenses();
-//    }
-    /**
-     * Llama al metodo findExpense del EJB mediante la interfaz.
-     *
-     * @param uuid el parametro necesario para el EJB.
-     * @return lo que devuelva el metodo del EJB.
-     * @throws SelectException gestiona una excepcion a la hora de buscar
-     * entidades.
-     */
-//    @GET
-//    @Path("{uuid}")
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public Expense findExpense(@PathParam("uuid") Long uuid) throws SelectException {
-//        return ei.findExpense(uuid);
-//    }
-    /**
-     * Llama al metodo findExpensesByAccount del EJB mediante la interfaz.
-     *
-     * @param uuid el parametro necesario para el EJB.
-     * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("findExpensesByAccount/{uuid}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Expense> findExpensesByAccount(@PathParam("uuid") Long uuid) throws SelectException {
-        return ei.findExpensesByAccount(uuid);
+    @Path("countExpenses")
+    public Long countExpenses() throws SelectException {
+        return ei.countExpenses();
     }
 }

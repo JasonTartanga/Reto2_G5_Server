@@ -36,6 +36,7 @@ public class RecurrentEJB implements RecurrentInterface {
     @Override
     public void createRecurrent(Recurrent recurrent) throws CreateException {
         try {
+            recurrent.setUuid(null);
             em.persist(recurrent);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
