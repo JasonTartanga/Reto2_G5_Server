@@ -16,7 +16,7 @@ public class KeyGenerator {
         try {
             //Especifico el tipo de clave que quiero generar
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(1024);
+            keyPairGenerator.initialize(2048);
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
             //Descubre la ruta de documentos

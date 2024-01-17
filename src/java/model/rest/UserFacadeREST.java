@@ -120,8 +120,8 @@ public class UserFacadeREST {
     public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
         System.out.println("Login --> mail: " + mail + " passwd: " + passwd);
 
-        //passwd = Asimetric.decipherPasswd(passwd);
-        //System.out.println("Passwd descifrada --> " + passwd);
+        passwd = Asimetric.decipherPasswd(passwd);
+        System.out.println("Passwd descifrada --> " + passwd);
         System.out.println(ui.loginUser(mail, passwd).toString());
         return ui.loginUser(mail, passwd);
     }
