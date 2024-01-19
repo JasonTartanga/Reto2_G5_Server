@@ -6,6 +6,7 @@ import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
 import model.entitys.Account;
+import model.enums.Plan;
 
 /**
  * Esta es la interfaz para la entidad Account.
@@ -125,4 +126,15 @@ public interface AccountInterface {
      * entidades.
      */
     public List<Account> filterAccountsByDivisa(String divisa) throws SelectException;
+    
+    /**
+     * Busca todos los Accounts que tengan el mismo plan.
+     * @param plan el plan de Account que buscamos.
+     * @return todos los account que tengan ese plan
+     * @throws SelectException SelectException gestiona una excepcion a la hora de buscar
+     * entidades
+     */
+    public List<Account> filterAccountsByPlan(Plan plan) throws SelectException;
+    
+    
 }

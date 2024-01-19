@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Account;
+import model.enums.Plan;
 import model.interfaces.AccountInterface;
 
 /**
@@ -192,5 +193,19 @@ public class AccountFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> filterAccountsByDivisa(@PathParam("divisa") String divisa) throws SelectException {
         return ai.filterAccountsByDivisa(divisa);
+    }
+    
+    /**
+     * Llama al metodo filterAccountsByPlan del EJB mediante la interfaz.
+     * @param plan el parametro necesario para el EJB
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    @GET
+    @Path("filterAccountsByPlan/{plan}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsByPlan(@PathParam("plan") Plan plan) throws SelectException {
+        return ai.filterAccountsByPlan(plan);
     }
 }

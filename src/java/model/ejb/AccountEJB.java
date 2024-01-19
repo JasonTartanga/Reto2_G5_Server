@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Account;
+import model.enums.Plan;
 import model.interfaces.AccountInterface;
 
 /**
@@ -231,6 +232,26 @@ public class AccountEJB implements AccountInterface {
         try {
             accounts
                     = em.createNamedQuery("filterAccountsByDivisa").setParameter("divisa", divisa).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+    
+    /**
+     * Busca todos los Accounts que tengan el mismo plan al especificado.
+     * @param plan el plan del Account que buscamos
+     * @return todos los Account que usen ese plan.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    
+    @Override
+    public List<Account> filterAccountsByPlan(Plan plan) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsByPlan").setParameter("plan", plan).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
