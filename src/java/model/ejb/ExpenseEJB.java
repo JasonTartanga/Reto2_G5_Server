@@ -34,13 +34,14 @@ public class ExpenseEJB implements ExpenseInterface {
      */
     @Override
     public Long countExpenses() throws SelectException {
-        List<Expense> expenses;
+        Long countExpenses = null;
+
         try {
-            expenses
-                    = em.createNamedQuery("listAllExpenses").getResultList();
+            countExpenses = (Long) em.createNamedQuery("listAllExpenses").getSingleResult();
+
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return Long.parseLong(expenses.size() + "");
+        return countExpenses;
     }
 }

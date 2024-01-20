@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import model.enums.Divisa;
 
 /**
  * Es la entidad Account.
@@ -37,23 +38,27 @@ import javax.xml.bind.annotation.XmlTransient;
     )
     ,
         @NamedQuery(
-            name = "filterAccountsByName", query = "SELECT A FROM Account A WHERE A.name like :name"
+            name = "filterAccountsByName", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.name like :name"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsByDescription", query = "SELECT A FROM Account A WHERE A.description like :description"
+            name = "filterAccountsByDescription", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.description like :description"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsWithHigherBalance", query = "SELECT A FROM Account A WHERE A.balance >= :balance"
+            name = "filterAccountsWithHigherBalance", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.balance >= :balance"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsWithLowerBalance", query = "SELECT A FROM Account A WHERE A.balance <= :balance"
+            name = "filterAccountsWithLowerBalance", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.balance <= :balance"
     )
     ,
     @NamedQuery(
-            name = "filterAccountsByDivisa", query = "SELECT A FROM Account A WHERE A.divisa = :divisa"
+            name = "filterAccountsByDivisa", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.divisa = :divisa"
+    )
+    ,
+    @NamedQuery(
+            name = "filterAccountsByPlan", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.plan = :plan"
     ),})
 @XmlRootElement
 public class Account implements Serializable {
@@ -67,7 +72,9 @@ public class Account implements Serializable {
 
     private String name;
     private String description;
-    private String divisa;
+
+    @Enumerated(EnumType.STRING)
+    private Divisa divisa;
     private Float balance;
 
     @Temporal(TemporalType.DATE)
@@ -107,11 +114,11 @@ public class Account implements Serializable {
         this.description = description;
     }
 
-    public String getDivisa() {
+    public Divisa getDivisa() {
         return divisa;
     }
 
-    public void setDivisa(String divisa) {
+    public void setDivisa(Divisa divisa) {
         this.divisa = divisa;
     }
 

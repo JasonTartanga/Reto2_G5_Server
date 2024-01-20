@@ -44,6 +44,7 @@ public class UserFacadeREST {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createUser(User user) throws CreateException {
+        user.setPassword(Asimetric.decipherPasswd(user.getPassword()));
         ui.createUser(user);
     }
 

@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Account;
+import model.enums.Divisa;
+import model.enums.Plan;
 import model.interfaces.AccountInterface;
 
 /**
@@ -142,11 +144,11 @@ public class AccountEJB implements AccountInterface {
      * entidades.
      */
     @Override
-    public List<Account> filterAccountsByName(String name) throws SelectException {
+    public List<Account> filterAccountsByName(String name, String mail) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsByName").setParameter("name", "%" + name + "%").getResultList();
+                    = em.createNamedQuery("filterAccountsByName").setParameter("name", "%" + name + "%").setParameter("mail", mail).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -165,11 +167,11 @@ public class AccountEJB implements AccountInterface {
      * entidades.
      */
     @Override
-    public List<Account> filterAccountsByDescription(String description) throws SelectException {
+    public List<Account> filterAccountsByDescription(String description, String mail) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsByDescription").setParameter("description", "%" + description + "%").getResultList();
+                    = em.createNamedQuery("filterAccountsByDescription").setParameter("description", "%" + description + "%").setParameter("mail", mail).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -185,11 +187,11 @@ public class AccountEJB implements AccountInterface {
      * entidades.
      */
     @Override
-    public List<Account> filterAccountsWithHigherBalance(Float balance) throws SelectException {
+    public List<Account> filterAccountsWithHigherBalance(Float balance, String mail) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsWithHigherBalance").setParameter("balance", balance).getResultList();
+                    = em.createNamedQuery("filterAccountsWithHigherBalance").setParameter("balance", balance).setParameter("mail", mail).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -205,11 +207,11 @@ public class AccountEJB implements AccountInterface {
      * entidades.
      */
     @Override
-    public List<Account> filterAccountsWithLowerBalance(Float balance) throws SelectException {
+    public List<Account> filterAccountsWithLowerBalance(Float balance, String mail) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsWithLowerBalance").setParameter("balance", balance).getResultList();
+                    = em.createNamedQuery("filterAccountsWithLowerBalance").setParameter("balance", balance).setParameter("mail", mail).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
@@ -226,11 +228,23 @@ public class AccountEJB implements AccountInterface {
      * entidades.
      */
     @Override
-    public List<Account> filterAccountsByDivisa(String divisa) throws SelectException {
+    public List<Account> filterAccountsByDivisa(Divisa divisa, String mail) throws SelectException {
         List<Account> accounts = null;
         try {
             accounts
-                    = em.createNamedQuery("filterAccountsByDivisa").setParameter("divisa", divisa).getResultList();
+                    = em.createNamedQuery("filterAccountsByDivisa").setParameter("divisa", divisa).setParameter("mail", mail).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+
+    @Override
+    public List<Account> filterAccountsByPlan(Plan plan, String mail) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsByPlan").setParameter("plan", plan).setParameter("mail", mail).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

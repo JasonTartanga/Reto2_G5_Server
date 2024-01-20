@@ -6,6 +6,8 @@ import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
 import model.entitys.Account;
+import model.enums.Divisa;
+import model.enums.Plan;
 
 /**
  * Esta es la interfaz para la entidad Account.
@@ -75,12 +77,13 @@ public interface AccountInterface {
      * nombre.
      *
      * @param name el nombre una porcion del nombre del Account que buscamos.
+     * @param mail el identificador unico del usuario.
      * @return todos los Account que se llamen o contengan esa porcion en su
      * nombre.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Account> filterAccountsByName(String name) throws SelectException;
+    public List<Account> filterAccountsByName(String name, String mail) throws SelectException;
 
     /**
      * Busca todos los Accounts por descripcion o que contengan una porcion en
@@ -88,41 +91,53 @@ public interface AccountInterface {
      *
      * @param description la descripcion o una porcion de la descripcion del
      * Account que buscamos.
+     * @param mail el identificador unico del usuario.
      * @return todos los Account que se llamen o contengan esa porcion en su
      * descripcion.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Account> filterAccountsByDescription(String description) throws SelectException;
+    public List<Account> filterAccountsByDescription(String description, String mail) throws SelectException;
 
     /**
      * Busca todos los Accounts que tengan un mayor balance al especificado.
      *
      * @param balance el balance que queramos que supere.
+     * @param mail el identificador unico del usuario.
      * @return todos los Account que tengan mayor balance al espeficicado.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Account> filterAccountsWithHigherBalance(Float balance) throws SelectException;
+    public List<Account> filterAccountsWithHigherBalance(Float balance, String mail) throws SelectException;
 
     /**
      * Busca todos los Accounts que tengan un menor balance al especificado.
      *
      * @param balance el balance que queramos que sea inferior.
+     * @param mail el identificador unico del usuario.
      * @return todos los Account que tengan menor balance al espeficicado.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Account> filterAccountsWithLowerBalance(Float balance) throws SelectException;
+    public List<Account> filterAccountsWithLowerBalance(Float balance, String mail) throws SelectException;
 
     /**
-     *
      * Busca todos los Accounts que tengan la misma divisa al especificado.
      *
      * @param divisa la divisa del Account que buscamos.
+     * @param mail
      * @return todos los Account que usen esa divisa.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Account> filterAccountsByDivisa(String divisa) throws SelectException;
+    public List<Account> filterAccountsByDivisa(Divisa divisa, String mail) throws SelectException;
+
+    /**
+     *
+     * @param plan
+     * @param mail
+     * @return
+     * @throws SelectException
+     */
+    public List<Account> filterAccountsByPlan(Plan plan, String mail) throws SelectException;
 }
