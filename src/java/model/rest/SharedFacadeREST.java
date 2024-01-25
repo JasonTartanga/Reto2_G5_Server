@@ -66,6 +66,7 @@ public class SharedFacadeREST {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Shared shared) throws CreateException {
+        System.out.println("Llega --> " + shared.toString());
         si.createShared(shared);
     }
 

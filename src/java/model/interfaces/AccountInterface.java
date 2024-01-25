@@ -140,4 +140,6 @@ public interface AccountInterface {
      * @throws SelectException
      */
     public List<Account> filterAccountsByPlan(Plan plan, String mail) throws SelectException;
+
+    public Long countAccount() throws SelectException;
 }

@@ -209,4 +209,10 @@ public class AccountFacadeREST {
     public List<Account> filterAccountsByPlan(@PathParam("plan") Plan plan, @PathParam("mail") String mail) throws SelectException {
         return ai.filterAccountsByPlan(plan, mail);
     }
+
+    @GET
+    @Path("countAccount")
+    public Long countAccount() throws SelectException {
+        return ai.countAccount();
+    }
 }

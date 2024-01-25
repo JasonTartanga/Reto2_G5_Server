@@ -32,6 +32,7 @@ public class SharedEJB implements SharedInterface {
     @Override
     public void createShared(Shared shared) throws CreateException {
         try {
+            System.out.println("Creando shared --> " + shared.toString());
             em.persist(shared);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());

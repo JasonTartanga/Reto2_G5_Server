@@ -59,6 +59,10 @@ import model.enums.Divisa;
     ,
     @NamedQuery(
             name = "filterAccountsByPlan", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.plan = :plan"
+    )
+    ,
+    @NamedQuery(
+            name = "countAccount", query = "SELECT max(A.id) FROM Account A"
     ),})
 @XmlRootElement
 public class Account implements Serializable {

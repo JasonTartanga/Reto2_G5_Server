@@ -34,6 +34,8 @@ public class AccountEJB implements AccountInterface {
     @Override
     public void createAccount(Account account) throws CreateException {
         try {
+            account.setId(null);
+            System.out.println("Creando el siguiente account --> " + account.toString());
             em.persist(account);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
@@ -249,5 +251,18 @@ public class AccountEJB implements AccountInterface {
             throw new SelectException(e.getMessage());
         }
         return accounts;
+    }
+
+    @Override
+    public Long countAccount() throws SelectException {
+        Long countAccount = null;
+
+        try {
+            countAccount = (Long) em.createNamedQuery("countAccount").getSingleResult();
+
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return countAccount;
     }
 }

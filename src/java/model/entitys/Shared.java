@@ -81,4 +81,10 @@ public class Shared implements Serializable {
     public void setPermissions(Permissions permissions) {
         this.permissions = permissions;
     }
+
+    @Override
+    public String toString() {
+        return "Shared{" + "idShared=" + idShared + ", account=" + account + ", user=" + user + ", permissions=" + permissions + '}';
+    }
+
 }

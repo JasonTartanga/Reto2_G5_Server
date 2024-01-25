@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 public class KeyGenerator {
 
+    private static String rutaCashTracker = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "CashTracker" + File.separator;
+
     public static void main(String[] args) {
         try {
             //Especifico el tipo de clave que quiero generar
@@ -19,26 +21,23 @@ public class KeyGenerator {
             keyPairGenerator.initialize(2048);
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-            //Descubre la ruta de documentos
-            String rutaDocs = System.getProperty("user.home") + File.separator + "Documents";
-
             //Creo una carpeta llamada CashTracker
-            File nuevoArchivo = new File(rutaDocs, "CashTracker");
-            if (!nuevoArchivo.getParentFile().exists()) {
-                nuevoArchivo.getParentFile().mkdirs();
+            File carpeta = new File(System.getProperty("user.home") + File.separator + "Documents\\CashTracker");
+            if (!carpeta.exists()) {
+                carpeta.mkdirs();
             }
 
             //Creo la clave publica
             PublicKey publicKeyAndMore = keyPair.getPublic();
             byte[] publicKeyBytes = publicKeyAndMore.getEncoded();
-            try (FileOutputStream publicKeyFile = new FileOutputStream(rutaDocs + "\\CashTracker\\publicKey.der")) {
+            try (FileOutputStream publicKeyFile = new FileOutputStream(rutaCashTracker + "publicKey.der")) {
                 publicKeyFile.write(publicKeyBytes);
             }
 
             //Creo la clave privada
             PrivateKey privateKey = keyPair.getPrivate();
             byte[] privateKeyBytes = privateKey.getEncoded();
-            try (FileOutputStream privateKeyFile = new FileOutputStream(rutaDocs + "\\CashTracker\\privateKey.der")) {
+            try (FileOutputStream privateKeyFile = new FileOutputStream(rutaCashTracker + "privateKey.der")) {
                 privateKeyFile.write(privateKeyBytes);
             }
 
