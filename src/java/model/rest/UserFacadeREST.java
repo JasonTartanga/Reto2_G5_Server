@@ -1,11 +1,15 @@
 package model.rest;
 
 import cipher.Asimetric;
+import cipher.EnviarEmail;
+import cipher.Hash;
 import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import model.ejb.UserEJB;
 import model.entitys.User;
 import model.interfaces.UserInterface;
 
@@ -44,6 +49,8 @@ public class UserFacadeREST {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void createUser(User user) throws CreateException {
+        String passwd = Asimetric.decipherPasswd(user.getPassword());
+        user.setPassword(Hash.hashText(passwd));
         ui.createUser(user);
     }
 
@@ -92,6 +99,24 @@ public class UserFacadeREST {
         return ui.findUser(mail);
     }
 
+    @GET
+    @Path("{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void findEmail(@PathParam("mail") String mail) throws SelectException {
+        User u = new User();
+        if (mail.equalsIgnoreCase(u.getMail())) {
+            try {
+                String pass = EnviarEmail.enviarEmail(mail);
+                String passhax = Hash.hashText(pass);
+                u.setPassword(passhax);
+                ui.updateUser(u);
+            } catch (UpdateException ex) {
+                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
     /**
      * Llama al metodo viewAllUser del EJB mediante la interfaz.
      *
@@ -119,6 +144,7 @@ public class UserFacadeREST {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
         passwd = Asimetric.decipherPasswd(passwd);
-        return ui.loginUser(mail, passwd);
+        String passhax = Hash.hashText(passwd);
+        return ui.loginUser(mail, passhax);
     }
 }

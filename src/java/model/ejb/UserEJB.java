@@ -132,4 +132,5 @@ public class UserEJB implements UserInterface {
 
         return u;
     }
+
 }

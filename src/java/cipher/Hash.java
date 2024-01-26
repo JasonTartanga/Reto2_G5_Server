@@ -32,9 +32,4 @@ public class Hash {
         }
     }
 
-    public static void main(String[] args) {
-        String inputText = "Hola, MD5!";
-        String md5Hash = hashText(inputText);
-        System.out.println("MD5 Hash: " + md5Hash);
-    }
 }

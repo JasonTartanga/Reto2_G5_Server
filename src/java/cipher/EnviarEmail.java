@@ -17,43 +17,55 @@ import java.util.ResourceBundle;
 
 public class EnviarEmail {
 
-    public static void main(String[] args) {
+    public static String enviarEmail(String email) {
 
+        String clave = null;
+        final String ZOHO_HOST = "smtp.zoho.eu";
+        final String TLS_PORT = "897";
         String contrasena = generarContrasena();
+        String zoho = SimetricoDescifrar.descifrarTexto(clave);
+        String[] partes = zoho.split("/");
 
-        // protocol properties
-        Properties props = System.getProperties();
-        props.setProperty("mail.smtps.host", ResourceBundle.getBundle("claves").getString("ZOHO_HOST")); // change to GMAIL_HOST for gmail                                                         // for gmail
-        props.setProperty("mail.smtp.port", ResourceBundle.getBundle("claves").getString("TLS_PORT"));
-        props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtps.auth", "true");
+        if (partes.length == 2) {
+            String mail = partes[0];
+            String passwd = partes[1];
 
-        // close connection upon quit being sent
-        props.put("mail.smtps.quitwait", "false");
+            // protocol properties
+            Properties props = System.getProperties();
+            props.setProperty("mail.smtps.host", ZOHO_HOST); // change to GMAIL_HOST for gmail                                                         // for gmail
+            props.setProperty("mail.smtp.port", TLS_PORT);
+            props.setProperty("mail.smtp.starttls.enable", "true");
+            props.setProperty("mail.smtps.auth", "true");
 
-        Session session = Session.getInstance(props, null);
+            // close connection upon quit being sent
+            props.put("mail.smtps.quitwait", "false");
 
-        try {
-            // create the message
-            final MimeMessage msg = new MimeMessage(session);
+            Session session = Session.getInstance(props, null);
 
-            // set recipients and content
-            msg.setFrom(new InternetAddress(ResourceBundle.getBundle("claves").getString("SENDER_USERNAME")));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("jasontartanga@gmail", false));
-            msg.setSubject("Demo");
-            msg.setText("Cortate el pelo", "utf-8", "html");
-            msg.setSentDate(new Date());
+            try {
+                // create the message
+                final MimeMessage msg = new MimeMessage(session);
 
-            // send the mail
-            Transport transport = session.getTransport("smtps");
-            // send the mail
-            transport.connect(ResourceBundle.getBundle("claves").getString("ZOHO_HOST"), ResourceBundle.getBundle("claves").getString("SENDER_USERNAME"), ResourceBundle.getBundle("claves").getString("SENDER_PASSWORD"));
-            transport.sendMessage(msg, msg.getAllRecipients());
+                // set recipients and content
+                msg.setFrom(new InternetAddress(mail));
+                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
+                msg.setSubject("Demo");
+                msg.setText(contrasena, "utf-8", "html");
+                msg.setSentDate(new Date());
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+                // send the mail
+                Transport transport = session.getTransport("smtps");
+                // send the mail
+                transport.connect(ZOHO_HOST, mail, passwd);
+                transport.sendMessage(msg, msg.getAllRecipients());
+
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+
+            }
 
         }
+        return contrasena;
 
     }
 
