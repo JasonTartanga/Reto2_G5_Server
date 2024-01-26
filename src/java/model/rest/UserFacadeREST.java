@@ -2,6 +2,7 @@ package model.rest;
 
 import cipher.Asimetric;
 import exceptions.CreateException;
+import exceptions.CredentialErrorException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
@@ -114,11 +115,13 @@ public class UserFacadeREST {
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
+     * @throws CredentialErrorException gestiona una excepcion por si no se
+     * encuentra el usuario con la contraseña.
      */
     @GET
     @Path("login/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
+    public User loginUser(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException, CredentialErrorException {
         passwd = Asimetric.decipherPasswd(passwd);
         return ui.loginUser(mail, passwd);
     }

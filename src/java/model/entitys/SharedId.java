@@ -62,4 +62,9 @@ public class SharedId implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "SharedId{" + "id=" + id + ", mail=" + mail + '}';
+    }
+
 }

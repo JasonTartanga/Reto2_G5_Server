@@ -27,7 +27,7 @@ import model.enums.Divisa;
  * @author Jessica.
  */
 @Entity
-@Table(name = "Account", schema = "CashTracker")
+@Table(name = "account", schema = "CashTracker")
 @NamedQueries({
     @NamedQuery(
             name = "viewAllAccounts", query = "SELECT A FROM Account A"
