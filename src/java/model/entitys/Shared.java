@@ -22,7 +22,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Shared", schema = "CashTracker")
 @NamedQueries({
     @NamedQuery(
-            //name = "findShared", query = "SELECT S FROM Shared S WHERE S.idShared.id = :id AND S.idShared.mail = :mail"
             name = "findShared", query = "SELECT S FROM Shared S WHERE S.account.id = :id AND S.user.mail = :mail"
     )
     ,
@@ -38,11 +37,11 @@ public class Shared implements Serializable {
     @EmbeddedId
     private SharedId idShared;
 
-    @MapsId("id")
+    @MapsId("accountId")
     @ManyToOne
     private Account account;
 
-    @MapsId("mail")
+    @MapsId("userMail")
     @ManyToOne
     private User user;
 

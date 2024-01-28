@@ -47,6 +47,7 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Privileges privileges;
 
+    //@OneToMany(cascade = ALL, mappedBy = "user", orphanRemoval = true)
     @OneToMany(cascade = ALL, mappedBy = "user")
     private List<Shared> shared;
 
@@ -107,7 +108,6 @@ public class User implements Serializable {
         this.privileges = privileges;
     }
 
-    //@XmlTransient
     @XmlTransient
     public List<Shared> getShared() {
         return shared;

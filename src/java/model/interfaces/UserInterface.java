@@ -1,7 +1,6 @@
 package model.interfaces;
 
 import exceptions.CreateException;
-import exceptions.CredentialErrorException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
@@ -70,9 +69,7 @@ public interface UserInterface {
      * @return todos los datos del usuario o null.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
-     * @throws exceptions.CredentialErrorException gestiona una excepcion por si
-     * no se encuentra el usuario con la contraseña.
      */
-    public User loginUser(String mail, String passwd) throws SelectException, CredentialErrorException;
+    public User loginUser(String mail, String passwd) throws SelectException;
 
 }

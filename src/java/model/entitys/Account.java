@@ -27,7 +27,7 @@ import model.enums.Divisa;
  * @author Jessica.
  */
 @Entity
-@Table(name = "account", schema = "CashTracker")
+@Table(name = "Account", schema = "CashTracker")
 @NamedQueries({
     @NamedQuery(
             name = "viewAllAccounts", query = "SELECT A FROM Account A"
@@ -87,7 +87,8 @@ public class Account implements Serializable {
     @Enumerated(EnumType.STRING)
     private Plan plan;
 
-    @OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
+    //@OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
+    @OneToMany(cascade = ALL, mappedBy = "account")
     private List<Shared> shared;
 
     @OneToMany(mappedBy = "account", orphanRemoval = true)

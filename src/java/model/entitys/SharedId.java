@@ -13,31 +13,31 @@ import javax.persistence.Embeddable;
 public class SharedId implements Serializable {
 
     //******************** ATRIBUTOS *********************/
-    private Long id;
-    private String mail;
+    private Long accountId;
+    private String userMail;
 
     //******************** GETTERS && SETTERS *********************/
-    public Long getId() {
-        return id;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
-    public String getMail() {
-        return mail;
+    public String getUserMail() {
+        return userMail;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + Objects.hashCode(this.id);
-        hash = 31 * hash + Objects.hashCode(this.mail);
+        hash = 31 * hash + Objects.hashCode(this.accountId);
+        hash = 31 * hash + Objects.hashCode(this.userMail);
         return hash;
     }
 
@@ -53,10 +53,10 @@ public class SharedId implements Serializable {
             return false;
         }
         final SharedId other = (SharedId) obj;
-        if (!Objects.equals(this.mail, other.mail)) {
+        if (!Objects.equals(this.userMail, other.userMail)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.accountId, other.accountId)) {
             return false;
         }
         return true;
@@ -64,7 +64,7 @@ public class SharedId implements Serializable {
 
     @Override
     public String toString() {
-        return "SharedId{" + "id=" + id + ", mail=" + mail + '}';
+        return "SharedId{" + "accountId=" + accountId + ", userMail=" + userMail + '}';
     }
 
 }

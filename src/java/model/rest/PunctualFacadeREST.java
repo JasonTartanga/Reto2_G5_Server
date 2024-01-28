@@ -59,7 +59,7 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
     @PUT
     @Path("{uuid}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateRecurrent(@PathParam("uuid") Long uuid, Punctual punctual) throws UpdateException {
+    public void updatePunctual(@PathParam("uuid") Long uuid, Punctual punctual) throws UpdateException {
         pi.updatePunctual(punctual);
     }
 

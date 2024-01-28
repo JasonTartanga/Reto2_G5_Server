@@ -1,14 +1,12 @@
 package model.ejb;
 
 import exceptions.CreateException;
-import exceptions.CredentialErrorException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import model.entitys.User;
 import model.interfaces.UserInterface;
@@ -124,18 +122,15 @@ public class UserEJB implements UserInterface {
      * entidades.
      */
     @Override
-    public User loginUser(String mail, String passwd) throws SelectException, CredentialErrorException {
+    public User loginUser(String mail, String passwd) throws SelectException {
         User u = null;
         try {
             u = (User) em.createNamedQuery("loginUser").setParameter("mail", mail).setParameter("password", passwd).getSingleResult();
-
-        } catch (NoResultException e) {
-            throw new CredentialErrorException(e.getMessage());
-
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
 
         return u;
     }
+
 }

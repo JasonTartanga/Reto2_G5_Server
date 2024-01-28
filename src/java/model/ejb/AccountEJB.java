@@ -93,6 +93,7 @@ public class AccountEJB implements AccountInterface {
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
+        // System.out.println("Buscando el siguiente account " + a.toString());
         return a;
     }
 
@@ -255,14 +256,12 @@ public class AccountEJB implements AccountInterface {
 
     @Override
     public Long countAccount() throws SelectException {
-        Long countAccount = null;
-
+        Long id = null;
         try {
-            countAccount = (Long) em.createNamedQuery("countAccount").getSingleResult();
-
+            id = (Long) em.createNamedQuery("countAccount").getSingleResult();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        return countAccount;
+        return id;
     }
 }

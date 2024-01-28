@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import model.entitys.Account;
 import model.entitys.Shared;
 import model.interfaces.SharedInterface;
 
@@ -32,7 +33,12 @@ public class SharedEJB implements SharedInterface {
     @Override
     public void createShared(Shared shared) throws CreateException {
         try {
-            System.out.println("Creando shared --> " + shared.toString());
+            System.out.println("Creando el siguiente shared " + shared.toString());
+
+            Account acc = em.find(Account.class, shared.getAccount().getId());
+            //em.merge(acc);
+            shared.setAccount(acc);
+
             em.persist(shared);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
