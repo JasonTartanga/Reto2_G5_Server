@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class EnviarEmail {
+public class EnviarEmailOlvidar {
 
     public static String enviarEmail(String email) {
 
