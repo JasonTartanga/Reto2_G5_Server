@@ -67,46 +67,24 @@ public class UserFacadeREST {
     @Path("{mail}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void updateUser(@PathParam("mail") String mail, User user) throws UpdateException {
-        //String passwd = Asimetric.decipherPasswd(user.getPassword());
-        //if (user.getPassword().equalsIgnoreCase(passwd)) {
-        //String passhax = Hash.hashText(passwd);
-        // user.setPassword(passhax);
+
         ui.updateUser(user);
-        //}
 
     }
 
-//    @GET
-//    @Path("{passwd}")
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void findPasswd(@PathParam("passwd") String passwdVieja, String passwdNueva) throws SelectException {
-//
-//        User u = new User();
-//        passwdVieja = Asimetric.decipherPasswd(passwdVieja);
-//        String passhaxVieja = Hash.hashText(passwdVieja);
-//        if (passhaxVieja.equalsIgnoreCase(u.getPassword())) {
-//            try {
-//                passwdNueva = Asimetric.decipherPasswd(passwdNueva);
-//                String passhaxNueva = Hash.hashText(passwdNueva);
-//                u.setPassword(passhaxNueva);
-//                ui.updateUser(u);
-//            } catch (UpdateException ex) {
-//                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//
-//    }
     @GET
-    @Path("{passwd}")
+    @Path("findPasswdAndSendMail/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void findPasswd(@PathParam("passwd") String passwd) throws SelectException {
+    public void findPasswdAndSendMail(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
 
-        User u = new User();
+        User user = findUser(mail);
         try {
+
             passwd = Asimetric.decipherPasswd(passwd);
+            EnviarEmailCambiar.enviarEmail(mail, passwd);
             String passhax = Hash.hashText(passwd);
-            u.setPassword(passhax);
-            ui.updateUser(u);
+            user.setPassword(passhax);
+            ui.updateUser(user);
         } catch (UpdateException ex) {
             Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,20 +92,19 @@ public class UserFacadeREST {
     }
 
     @GET
-    @Path("{mail}/{passwd}")
+    @Path("login/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void findPasswdAndSendMail(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
-
-        User u = new User();
-        try {
-
-            passwd = Asimetric.decipherPasswd(passwd);
-            EnviarEmailCambiar.enviarEmail(mail, passwd);
-            String passhax = Hash.hashText(passwd);
-            u.setPassword(passhax);
-            ui.updateUser(u);
-        } catch (UpdateException ex) {
-            Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+    public void findEmail(@PathParam("mail") String mail) throws SelectException {
+        User user = findUser(mail);
+        if (mail.equalsIgnoreCase(user.getMail())) {
+            try {
+                String pass = EnviarEmailOlvidar.enviarEmail(mail);
+                String passhax = Hash.hashText(pass);
+                user.setPassword(passhax);
+                ui.updateUser(user);
+            } catch (UpdateException ex) {
+                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -162,24 +139,6 @@ public class UserFacadeREST {
         return ui.findUser(mail);
     }
 
-    @GET
-    @Path("{mail}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void findEmail(@PathParam("mail") String mail) throws SelectException {
-        User u = new User();
-        if (mail.equalsIgnoreCase(u.getMail())) {
-            try {
-                String pass = EnviarEmailOlvidar.enviarEmail(mail);
-                String passhax = Hash.hashText(pass);
-                u.setPassword(passhax);
-                ui.updateUser(u);
-            } catch (UpdateException ex) {
-                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }
-
     /**
      * Llama al metodo viewAllUser del EJB mediante la interfaz.
      *
@@ -210,4 +169,5 @@ public class UserFacadeREST {
         String passhax = Hash.hashText(passwd);
         return ui.loginUser(mail, passhax);
     }
+
 }
