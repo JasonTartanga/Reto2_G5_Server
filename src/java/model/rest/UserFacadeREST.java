@@ -1,7 +1,8 @@
 package model.rest;
 
 import cipher.Asimetric;
-import cipher.EnviarEmail;
+import cipher.EnviarEmailCambiar;
+import cipher.EnviarEmailOlvidar;
 import cipher.Hash;
 import exceptions.CreateException;
 import exceptions.DeleteException;
@@ -99,23 +100,6 @@ public class UserFacadeREST {
         return ui.findUser(mail);
     }
 
-    @GET
-    @Path("forgotPassword/{mail}")
-    public void forgotPassword(@PathParam("mail") String mail) throws SelectException {
-        User u = findUser(mail);
-        if (u.getMail().equalsIgnoreCase(mail)) {
-            try {
-                String newPasswd = EnviarEmail.enviarEmail(mail);
-                String hashPasswd = Hash.hashText(newPasswd);
-                u.setPassword(hashPasswd);
-                ui.updateUser(u);
-            } catch (UpdateException ex) {
-                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }
-
     /**
      * Llama al metodo viewAllUser del EJB mediante la interfaz.
      *
@@ -145,5 +129,37 @@ public class UserFacadeREST {
         passwd = Asimetric.decipherPasswd(passwd);
         String passhax = Hash.hashText(passwd);
         return ui.loginUser(mail, passhax);
+    }
+
+    @GET
+    @Path("changePassword/{mail}/{passwd}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void changePassword(@PathParam("mail") String mail, @PathParam("passwd") String passwd) throws SelectException {
+        User user = findUser(mail);
+        try {
+            passwd = Asimetric.decipherPasswd(passwd);
+            EnviarEmailCambiar.enviarEmail(mail, passwd);
+            String passhax = Hash.hashText(passwd);
+            user.setPassword(passhax);
+            ui.updateUser(user);
+        } catch (UpdateException ex) {
+            Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @GET
+    @Path("forgotPassword/{mail}")
+    public void forgotPassword(@PathParam("mail") String mail) throws SelectException {
+        User u = findUser(mail);
+        if (u.getMail().equalsIgnoreCase(mail)) {
+            try {
+                String newPasswd = EnviarEmailOlvidar.enviarEmail(mail);
+                String hashPasswd = Hash.hashText(newPasswd);
+                u.setPassword(hashPasswd);
+                ui.updateUser(u);
+            } catch (UpdateException ex) {
+                Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

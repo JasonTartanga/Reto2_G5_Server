@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
-public class EnviarEmail {
+public class EnviarEmailOlvidar {
 
     public static String enviarEmail(String MAIL_RECEPTOR) {
 
