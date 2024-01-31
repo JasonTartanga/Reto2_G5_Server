@@ -35,10 +35,18 @@ public class SharedEJB implements SharedInterface {
         try {
             System.out.println("Creando el siguiente shared " + shared.toString());
 
-            Account acc = em.find(Account.class, shared.getAccount().getId());
-            //em.merge(acc);
-            shared.setAccount(acc);
+            //Account acc = em.find(Account.class, shared.getAccount().getId());
+            //em.merge(acc);shared.setAccount(acc);
+            if (!em.contains(shared.getAccount())) {
+                shared.setAccount(em.merge(shared.getAccount()));
+            }
 
+            if (!em.contains(shared.getUser())) {
+                shared.setUser(em.merge(shared.getUser()));
+            }
+//if (em.contains(shared.getUser())) {
+//                em.remove(em.merge(shared.getUser()));
+//            }
             em.persist(shared);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());

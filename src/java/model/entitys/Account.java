@@ -88,10 +88,10 @@ public class Account implements Serializable {
     private Plan plan;
 
     //@OneToMany(cascade = ALL, mappedBy = "account", orphanRemoval = true)
-    @OneToMany(cascade = ALL, mappedBy = "account")
+    @OneToMany(mappedBy = "account")
     private List<Shared> shared;
 
-    @OneToMany(mappedBy = "account", orphanRemoval = true)
+    @OneToMany(mappedBy = "account")
     private List<Expense> expenses;
 
     //******************** GETTERS && SETTERS *********************/
@@ -192,7 +192,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", nombre=" + name + ", description=" + description + ", divisa=" + divisa + ", balance=" + balance + ", date=" + date + ", plan=" + plan + ", shared=" + shared + ", expenses=" + expenses + '}';
+        return "Account{" + "id=" + id + ", nombre=" + name + ", description=" + description + ", divisa=" + divisa + ", balance=" + balance + ", date=" + date + ", plan=" + plan + '}';
     }
 
 }

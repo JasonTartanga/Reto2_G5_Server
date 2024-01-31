@@ -3,7 +3,6 @@ package model.entitys;
 import model.enums.Privileges;
 import java.io.Serializable;
 import java.util.List;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -48,7 +47,7 @@ public class User implements Serializable {
     private Privileges privileges;
 
     //@OneToMany(cascade = ALL, mappedBy = "user", orphanRemoval = true)
-    @OneToMany(cascade = ALL, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Shared> shared;
 
     //******************** GETTERS && SETTERS *********************/
