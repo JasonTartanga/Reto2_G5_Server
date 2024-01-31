@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package cipher;
 
 import java.security.SecureRandom;
@@ -19,7 +15,7 @@ public class EnviarEmail {
     public static String enviarEmail(String MAIL_RECEPTOR) {
 
         final String ZOHO_HOST = "smtp.zoho.eu";
-        final String TLS_PORT = "465"; //897
+        final String TLS_PORT = "897"; //465
         final String MAIL_SUBJECT = "Recuperacion de contraseña";
 
         String newPassword = generarContrasena();

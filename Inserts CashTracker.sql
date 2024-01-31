@@ -1,9 +1,9 @@
-INSERT INTO User VALUES ('jason@gmail.com', 'Barakaldo', 'Jason', 'abcd*1234', '688878533', 'CLIENT', '48901');
-INSERT INTO User VALUES ('david@gmail.com', 'Bilbao', 'David', 'abcd*1234', '123456789', 'ADMIN', '15987');
-INSERT INTO User VALUES ('bayron@gmail.com', 'Santutxu', 'Bayron', 'abcd', '987654321', 'CLIENT', '35987');
-INSERT INTO User VALUES ('ian@gmail.com', 'Sarriko', 'Ian', 'abcd*1234', '258964731', 'ADMIN', '18765');
-INSERT INTO User VALUES ('jessica@gmail.com', 'Astrabudua', 'Jessica', 'abcd*1234', '258964731', 'ADMIN', '48901');
-INSERT INTO User VALUES ('markel@gmail.com', 'San Ignacio', 'Markel', '1234', '789648247', 'CLIENT', '97345');
+INSERT INTO User VALUES ('jason@gmail.com', 'Barakaldo', 'Jason', 'F688ED3E171E7BAD7563C7461404BAB2', '688878533', 'CLIENT', '48901');
+INSERT INTO User VALUES ('david@gmail.com', 'Bilbao', 'David', 'E2FC714C4727EE9395F324CD2E7F331F', '123456789', 'ADMIN', '15987');
+INSERT INTO User VALUES ('bayron@gmail.com', 'Santutxu', 'Bayron', 'E2FC714C4727EE9395F324CD2E7F331F', '987654321', 'CLIENT', '35987');
+INSERT INTO User VALUES ('ian@gmail.com', 'Sarriko', 'Ian', 'F688ED3E171E7BAD7563C7461404BAB2', '258964731', 'ADMIN', '18765');
+INSERT INTO User VALUES ('jessica@gmail.com', 'Astrabudua', 'Jessica', 'F688ED3E171E7BAD7563C7461404BAB2', '258964731', 'ADMIN', '48901');
+INSERT INTO User VALUES ('markel@gmail.com', 'San Ignacio', 'Markel', 'E2FC714C4727EE9395F324CD2E7F331F', '789648247', 'CLIENT', '97345');
 
 
 INSERT INTO Account VALUES (1, 69420, '2024-06-08', 'Viaje a madrid en junio', 'EUR', 'Concierto Duki', 'Viaje'); 
