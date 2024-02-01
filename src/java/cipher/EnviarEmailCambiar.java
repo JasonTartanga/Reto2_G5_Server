@@ -9,8 +9,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
+
+/**
+ * Clase para el envio de email para el cambio de contraseña
+ * @author Ian y Jessica
+ */
 public class EnviarEmailCambiar {
 
+    /**
+     * Metodo para enviar el email con el cambio de contraseña
+     * @param email el email de usuario
+     * @param passDescifrada la contraseña descrifrada
+     */
     public static void enviarEmail(String email, String passDescifrada) {
 
         final String ZOHO_HOST = "smtp.zoho.eu";

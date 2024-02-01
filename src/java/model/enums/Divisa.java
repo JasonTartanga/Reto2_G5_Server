@@ -1,7 +1,7 @@
 package model.enums;
 
 /**
- *
+ * Esta es la enumeracion que puede tener la divisa, que es utilizada para el account.
  * @author Jason.
  */
 public enum Divisa {

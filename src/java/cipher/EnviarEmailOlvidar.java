@@ -10,8 +10,17 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
+/**
+ * Clase para el envio de email cuando se olvida la contraseña
+ * @author Ian y Jessica
+ */
 public class EnviarEmailOlvidar {
 
+    /**
+     * Metodo para el envio de email cuando el usuario olvida su contraseña
+     * @param MAIL_RECEPTOR
+     * @return newPassword que es la nueva contraseña
+     */
     public static String enviarEmail(String MAIL_RECEPTOR) {
 
         final String ZOHO_HOST = "smtp.zoho.eu";
@@ -67,6 +76,10 @@ public class EnviarEmailOlvidar {
 
     }
 
+    /**
+     * Metodo para generar una contraseña aleatoria con una longitud maxima de 15 caracteres.
+     * @return la contraseña en una variable que se utiliza en el metodo anterior
+     */
     public static String generarContrasena() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         int longitudMaxima = 15;

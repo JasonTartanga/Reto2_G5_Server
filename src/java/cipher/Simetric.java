@@ -21,6 +21,11 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+
+/**
+ * Clase para cifrado simetrico
+ * @author Ian
+ */
 public class Simetric {
 
     // Fíjate que el String es de exactamente 16 bytes
