@@ -35,7 +35,6 @@ public class AccountEJB implements AccountInterface {
     public void createAccount(Account account) throws CreateException {
         try {
             account.setId(null);
-            System.out.println("Creando el siguiente account --> " + account.toString());
             em.persist(account);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());
@@ -93,7 +92,6 @@ public class AccountEJB implements AccountInterface {
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
-        // System.out.println("Buscando el siguiente account " + a.toString());
         return a;
     }
 
