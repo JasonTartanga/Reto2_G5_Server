@@ -166,7 +166,7 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
     @GET
     @Path("filterPunctualsWithHigherAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsWithHigherAmount(@PathParam("amount") String amount, @PathParam("account_id") Long account_id) throws SelectException {
+    public List<Punctual> filterPunctualsWithHigherAmount(@PathParam("amount") Float amount, @PathParam("account_id") Long account_id) throws SelectException {
         return pi.filterPunctualsWithHigherAmount(amount, account_id);
     }
 
@@ -183,7 +183,7 @@ public class PunctualFacadeREST extends ExpenseFacadeREST {
     @GET
     @Path("filterPunctualsWithLowerAmount/{amount}/{account_id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Punctual> filterPunctualsWithLowerAmount(@PathParam("amount") String amount, @PathParam("account_id") Long account_id) throws SelectException {
+    public List<Punctual> filterPunctualsWithLowerAmount(@PathParam("amount") Float amount, @PathParam("account_id") Long account_id) throws SelectException {
         return pi.filterPunctualsWithLowerAmount(amount, account_id);
     }
 
