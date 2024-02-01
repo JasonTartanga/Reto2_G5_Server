@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.entitys.Account;
+import model.enums.Divisa;
 import model.enums.Plan;
 import model.interfaces.AccountInterface;
 
@@ -50,13 +51,15 @@ public class AccountFacadeREST {
     /**
      * Llama al metodo updateAccount del EJB mediante la interfaz.
      *
+     * @param uuid el parametro necesario para el EJB.
      * @param account el Account que queremos modificar.
      * @throws UpdateException gestiona una excepcion a la hora de modificar
      * entidades.
      */
     @PUT
+    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateAccount(Account account) throws UpdateException {
+    public void updateAccount(@PathParam("id") Long uuid, Account account) throws UpdateException {
         ai.updateAccount(account);
     }
 
@@ -122,30 +125,32 @@ public class AccountFacadeREST {
      * Llama al metodo filterAccountsByName del EJB mediante la interfaz.
      *
      * @param name el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("filterAccountsByName/{name}")
+    @Path("filterAccountsByName/{name}/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsByName(@PathParam("name") String name) throws SelectException {
-        return ai.filterAccountsByName(name);
+    public List<Account> filterAccountsByName(@PathParam("name") String name, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsByName(name, mail);
     }
 
     /**
      * Llama al metodo filterAccountsByDescription del EJB mediante la interfaz.
      *
      * @param description el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("filterAccountsByDescription/{description}")
+    @Path("filterAccountsByDescription/{description}/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsByDescription(@PathParam("description") String description) throws SelectException {
-        return ai.filterAccountsByDescription(description);
+    public List<Account> filterAccountsByDescription(@PathParam("description") String description, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsByDescription(description, mail);
     }
 
     /**
@@ -153,15 +158,16 @@ public class AccountFacadeREST {
      * interfaz.
      *
      * @param balance el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("filterAccountsWithHigherBalance/{balance}")
+    @Path("filterAccountsWithHigherBalance/{balance}/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") Float balance) throws SelectException {
-        return ai.filterAccountsWithHigherBalance(balance);
+    public List<Account> filterAccountsWithHigherBalance(@PathParam("balance") Float balance, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithHigherBalance(balance, mail);
     }
 
     /**
@@ -169,43 +175,46 @@ public class AccountFacadeREST {
      * interfaz.
      *
      * @param balance el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("filterAccountsWithLowerBalance/{balance}")
+    @Path("filterAccountsWithLowerBalance/{balance}/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") Float balance) throws SelectException {
-        return ai.filterAccountsWithLowerBalance(balance);
+    public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") Float balance, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithLowerBalance(balance, mail);
     }
 
     /**
      * Llama al metodo filterAccountsByDivisa del EJB mediante la interfaz.
      *
      * @param divisa el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
      * @return lo que devuelva el metodo del EJB.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     @GET
-    @Path("filterAccountsByDivisa/{divisa}")
+    @Path("filterAccountsByDivisa/{divisa}/{mail}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsByDivisa(@PathParam("divisa") String divisa) throws SelectException {
-        return ai.filterAccountsByDivisa(divisa);
+    public List<Account> filterAccountsByDivisa(@PathParam("divisa") Divisa divisa, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsByDivisa(divisa, mail);
+    }
+
+    @GET
+    @Path("filterAccountsByPlan/{plan}/{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsByPlan(@PathParam("plan") Plan plan, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsByPlan(plan, mail);
     }
     
-    /**
-     * Llama al metodo filterAccountsByPlan del EJB mediante la interfaz.
-     * @param plan el parametro necesario para el EJB
-     * @return lo que devuelva el metodo del EJB.
-     * @throws SelectException gestiona una excepcion a la hora de buscar
-     * entidades.
-     */
-    @GET
-    @Path("filterAccountsByPlan/{plan}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Account> filterAccountsByPlan(@PathParam("plan") Plan plan) throws SelectException {
-        return ai.filterAccountsByPlan(plan);
+      @GET
+    @Path("countAccount")
+    public Long countAccount() throws SelectException {
+        return ai.countAccount();
     }
+
+
 }
