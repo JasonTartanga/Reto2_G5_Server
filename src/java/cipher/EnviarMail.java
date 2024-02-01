@@ -10,13 +10,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
-public class EnviarEmailOlvidar {
+public class EnviarMail {
 
-    public static String enviarEmail(String MAIL_RECEPTOR) {
+    public static String enviarEmail(String MAIL_RECEPTOR, String MAIL_SUBJECT, String MESSAGE) {
 
         final String ZOHO_HOST = "smtp.zoho.eu";
         final String TLS_PORT = "897"; //465
-        final String MAIL_SUBJECT = "Recuperacion de contraseña";
 
         String newPassword = generarContrasena();
         String decipherCredentials = Simetric.descifrarTexto("Clave");
@@ -48,7 +47,7 @@ public class EnviarEmailOlvidar {
             msg.setFrom(new InternetAddress(MAIL_EMISOR));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MAIL_RECEPTOR, false));
             msg.setSubject(MAIL_SUBJECT);
-            msg.setText("Tu nueva contraseña para iniciar sesion en CashTracker es: " + newPassword, "utf-8", "html");
+            msg.setText(MESSAGE, "utf-8", "html");
             msg.setSentDate(new Date());
 
             // send the mail

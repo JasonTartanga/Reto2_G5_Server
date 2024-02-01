@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Account;
+import model.entitys.Expense;
 import model.enums.Divisa;
 import model.enums.Plan;
 import model.interfaces.AccountInterface;
@@ -70,6 +71,10 @@ public class AccountEJB implements AccountInterface {
     @Override
     public void deleteAccount(Account account) throws DeleteException {
         try {
+            for (Expense r : account.getExpenses()) {
+                em.remove(em.merge(r));
+            }
+
             em.remove(em.merge(account));
         } catch (Exception e) {
             throw new DeleteException(e.getMessage());
@@ -87,8 +92,10 @@ public class AccountEJB implements AccountInterface {
     @Override
     public Account findAccount(Long id) throws SelectException {
         Account a = null;
+
         try {
-            a = em.find(Account.class, id);
+            a = em.find(Account.class,
+                     id);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

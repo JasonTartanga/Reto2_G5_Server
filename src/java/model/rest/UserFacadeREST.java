@@ -1,8 +1,7 @@
 package model.rest;
 
 import cipher.Asimetric;
-import cipher.EnviarEmailCambiar;
-import cipher.EnviarEmailOlvidar;
+import cipher.EnviarMail;
 import cipher.Hash;
 import exceptions.CreateException;
 import exceptions.DeleteException;
@@ -21,7 +20,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.ejb.UserEJB;
 import model.entitys.User;
 import model.interfaces.UserInterface;
 
@@ -138,10 +136,12 @@ public class UserFacadeREST {
         User user = findUser(mail);
         try {
             passwd = Asimetric.decipherPasswd(passwd);
-            EnviarEmailCambiar.enviarEmail(mail, passwd);
             String passhax = Hash.hashText(passwd);
             user.setPassword(passhax);
             ui.updateUser(user);
+
+            EnviarMail.enviarEmail(mail, "Cambio de contraseña", "Su contraseña se ha cambiado exitosamente");
+
         } catch (UpdateException ex) {
             Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,10 +153,13 @@ public class UserFacadeREST {
         User u = findUser(mail);
         if (u.getMail().equalsIgnoreCase(mail)) {
             try {
-                String newPasswd = EnviarEmailOlvidar.enviarEmail(mail);
-                String hashPasswd = Hash.hashText(newPasswd);
-                u.setPassword(hashPasswd);
+                String newPassword = EnviarMail.generarContrasena();
+                u.setPassword(Hash.hashText(newPassword));
                 ui.updateUser(u);
+
+                String MESSAGE = "Tu nueva contraseña para iniciar sesion en CashTracker es: " + newPassword;
+                EnviarMail.enviarEmail(mail, "Recuperacion de contraseña", MESSAGE);
+
             } catch (UpdateException ex) {
                 Logger.getLogger(UserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
             }
