@@ -129,6 +129,15 @@ public class UserFacadeREST {
         return ui.loginUser(mail, passhax);
     }
 
+    /**
+     * Llama al metodo de changePassword de la interfaz.
+     *
+     * @param mail es el parametro que se pasa para enviar email y encontrar el
+     * usuario mediante el findUser(email).
+     * @param passwd el parametro que se pasa para recoger la contraseña que ha
+     * decidido meter en el textField.
+     * @throws SelectException gestiona una excepcion.
+     */
     @GET
     @Path("changePassword/{mail}/{passwd}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -147,6 +156,13 @@ public class UserFacadeREST {
         }
     }
 
+    /**
+     * Llama al metodo de forgotPassword de la interfaz.
+     *
+     * @param mail es el parametro que se pasa para enviar email.
+     *
+     * @throws SelectException gestiona una excepcion.
+     */
     @GET
     @Path("forgotPassword/{mail}")
     public void forgotPassword(@PathParam("mail") String mail) throws SelectException {
