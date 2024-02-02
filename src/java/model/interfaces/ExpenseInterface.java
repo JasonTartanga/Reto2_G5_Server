@@ -18,7 +18,6 @@ public interface ExpenseInterface {
     /**
      * Busca todos los Expenses que tenga un Account.
      *
-     * @param id el identificador unico del Account.
      * @return todos los Expenses de un Account.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.

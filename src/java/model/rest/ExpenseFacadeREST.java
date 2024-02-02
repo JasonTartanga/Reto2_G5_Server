@@ -29,6 +29,7 @@ public class ExpenseFacadeREST {
     /**
      * Busca la cantidad de Expenses que hay.
      *
+     * @return el id mas alto.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */

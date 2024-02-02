@@ -21,6 +21,11 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * CLase para el cifrado simetrico
+ *
+ * @author Ian.
+ */
 public class Simetric {
 
     // Fíjate que el String es de exactamente 16 bytes
@@ -31,6 +36,7 @@ public class Simetric {
      * lo retorna
      *
      * @param clave La clave del usuario
+     * @return la contraseña en claro
      */
     public static String descifrarTexto(String clave) {
 

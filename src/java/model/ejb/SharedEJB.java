@@ -70,7 +70,7 @@ public class SharedEJB implements SharedInterface {
     /**
      * Elimina un Shared de la base de datos.
      *
-     * @param shared
+     * @param shared el shared que se va a eliminar
      * @throws DeleteException gestiona una excepcion a la hora de eliminar
      * entidades.
      */

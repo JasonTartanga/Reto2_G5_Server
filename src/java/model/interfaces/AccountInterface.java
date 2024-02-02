@@ -125,7 +125,7 @@ public interface AccountInterface {
      * Busca todos los Accounts que tengan la misma divisa al especificado.
      *
      * @param divisa la divisa del Account que buscamos.
-     * @param mail
+     * @param mail mail del usuario
      * @return todos los Account que usen esa divisa.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
@@ -134,10 +134,11 @@ public interface AccountInterface {
 
     /**
      *
-     * @param plan
-     * @param mail
-     * @return
-     * @throws SelectException
+     * @param plan la enumeracion del plan
+     * @param mail el email del usuario
+     * @return Todos los account que usen ese plan
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
      */
     public List<Account> filterAccountsByPlan(Plan plan, String mail) throws SelectException;
 

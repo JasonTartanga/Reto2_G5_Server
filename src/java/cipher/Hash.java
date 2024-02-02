@@ -4,15 +4,22 @@
  */
 package cipher;
 
-/**
- *
- * @author ian,Jessica
- */
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Clase para realizar el hash de las contraseñas
+ *
+ * @author Ian y Jessica
+ */
 public class Hash {
 
+    /**
+     * Metodo para hashear las contraseñas a la base de datos
+     *
+     * @param text es utilizado para pasar la contraseña
+     * @return null si entra en el catch
+     */
     public static String hashText(String text) {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");

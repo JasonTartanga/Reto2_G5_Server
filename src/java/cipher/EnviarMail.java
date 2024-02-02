@@ -10,14 +10,26 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
+/**
+ * Clase para el envio de email
+ *
+ * @author Ian y Jessica.
+ */
 public class EnviarMail {
 
-    public static String enviarEmail(String MAIL_RECEPTOR, String MAIL_SUBJECT, String MESSAGE) {
+    /**
+     * Metodo para enviar el email con las contraseñas
+     *
+     * @param MAIL_RECEPTOR es el receptos del email
+     * @param MAIL_SUBJECT es el asunto del email
+     * @param MESSAGE es el mensaje de correo
+     *
+     */
+    public static void enviarEmail(String MAIL_RECEPTOR, String MAIL_SUBJECT, String MESSAGE) {
 
         final String ZOHO_HOST = "smtp.zoho.eu";
         final String TLS_PORT = "897"; //465
 
-        String newPassword = generarContrasena();
         String decipherCredentials = Simetric.descifrarTexto("Clave");
 
         String[] parts = decipherCredentials.split("/");
@@ -61,11 +73,17 @@ public class EnviarMail {
             throw new RuntimeException(e);
 
         }
-
-        return newPassword;
+        ;
 
     }
 
+    /**
+     * Metodo para generar una contraseña aleatoria con una longitud maxima de
+     * 15 caracteres
+     *
+     * @return la contraseña en una variable que se utilizada en el metodo
+     * anterior
+     */
     public static String generarContrasena() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         int longitudMaxima = 15;
