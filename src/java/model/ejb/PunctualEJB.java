@@ -187,7 +187,7 @@ public class PunctualEJB implements PunctualInterface {
      * entidades.
      */
     @Override
-    public List<Punctual> filterPunctualsWithHigherAmount(String amount, Long account_id) throws SelectException {
+    public List<Punctual> filterPunctualsWithHigherAmount(Float amount, Long account_id) throws SelectException {
         List<Punctual> punctuals = null;
         try {
             punctuals
@@ -209,7 +209,7 @@ public class PunctualEJB implements PunctualInterface {
      * entidades.
      */
     @Override
-    public List<Punctual> filterPunctualsWithLowerAmount(String amount, Long account_id) throws SelectException {
+    public List<Punctual> filterPunctualsWithLowerAmount(Float amount, Long account_id) throws SelectException {
         List<Punctual> punctuals = null;
         try {
             punctuals

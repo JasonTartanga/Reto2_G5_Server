@@ -105,7 +105,7 @@ public interface PunctualInterface {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Punctual> filterPunctualsWithHigherAmount(String amount, Long account_id) throws SelectException;
+    public List<Punctual> filterPunctualsWithHigherAmount(Float amount, Long account_id) throws SelectException;
 
     /**
      * Busca todos los Punctual de un Account que tengan un amount menor al
@@ -117,7 +117,7 @@ public interface PunctualInterface {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
-    public List<Punctual> filterPunctualsWithLowerAmount(String amount, Long account_id) throws SelectException;
+    public List<Punctual> filterPunctualsWithLowerAmount(Float amount, Long account_id) throws SelectException;
 
     /**
      * Busca todos los Punctual de un Account que tengan una Importance
