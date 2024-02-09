@@ -4,6 +4,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -226,6 +227,63 @@ public class AccountEJB implements AccountInterface {
         return accounts;
     }
 
+    
+    /**
+     * Busca todos los Accounts que tengan un balance igual al especificado.
+     * @param balance el balance que queramos que sea inferior
+     * @return todos los Account que tengan igual balance al espeficicado
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    @Override
+    public List<Account> filterAccountsWithEqualBalance(Float balance, String mail) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsWithEqualBalance").setParameter("balance", balance).setParameter("mail", mail).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+    
+    
+    @Override
+    public List<Account> filterAccountsWithDateAfter(Date date, String mail) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsWithDateAfter").setParameter("date", date).setParameter("mail", mail).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+    
+      @Override
+    public List<Account> filterAccountsWithDateEquals(Date date, String mail) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsWithDateEquals").setParameter("date", date).setParameter("mail", mail).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+
+      @Override
+    public List<Account> filterAccountsWithDateBefore(Date date, String mail) throws SelectException {
+        List<Account> accounts = null;
+        try {
+            accounts
+                    = em.createNamedQuery("filterAccountsWithDateBefore").setParameter("date", date).setParameter("mail", mail).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return accounts;
+    }
+    
     /**
      *
      * Busca todos los Accounts que tengan la misma divisa al especificado.

@@ -54,6 +54,24 @@ import model.enums.Divisa;
     )
     ,
     @NamedQuery(
+            name = "filterAccountsWithEqualBalance", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.balance = :balance"
+    )
+    ,
+    @NamedQuery(
+            name = "filterAccountsWithDateAfter", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.date > :selectedDate"
+    )
+    ,
+    @NamedQuery(
+            name = "filterAccountsWithDateEquals", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.date = :selectedDate"
+    )
+    ,
+
+    @NamedQuery(
+            name = "filterAccountsWithDateBefore", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.date < :selectedDate"
+    )
+    ,
+
+        @NamedQuery(
             name = "filterAccountsByDivisa", query = "SELECT A FROM Account A JOIN A.shared S WHERE S.user.mail = :mail AND A.divisa = :divisa"
     )
     ,

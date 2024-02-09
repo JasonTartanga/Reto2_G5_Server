@@ -4,6 +4,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -186,7 +187,46 @@ public class AccountFacadeREST {
     public List<Account> filterAccountsWithLowerBalance(@PathParam("balance") Float balance, @PathParam("mail") String mail) throws SelectException {
         return ai.filterAccountsWithLowerBalance(balance, mail);
     }
+    
+    /**
+     * Llama al metodo filterAccountsWithEqualBalance del EJB mediante la
+     * interfaz.
+     * @param balance el parametro necesario para el EJB.
+     * @param mail el parametro necesario para el EJB.
+     * @return lo que devuelva el metodo del EJB.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades. 
+     */
+    @GET
+    @Path("filterAccountsWithEqualBalance/{balance}/{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithEqualBalance(@PathParam("balance") Float balance, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithLowerBalance(balance, mail);
+    }
 
+    @GET
+    @Path("filterAccountsWithDateAfter/{date}/{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithDateAfter(@PathParam("date") Date date, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithDateAfter(date, mail);
+    }
+    
+    @GET
+    @Path("filterAccountsWithDateEquals/{date}/{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithDateEquals(@PathParam("date") Date date, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithDateEquals(date, mail);
+    }
+    
+    @GET
+    @Path("filterAccountsWithDateBefore/{date}/{mail}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> filterAccountsWithDateBefore(@PathParam("date") Date date, @PathParam("mail") String mail) throws SelectException {
+        return ai.filterAccountsWithDateBefore(date, mail);
+    }
+    
+    
+    
     /**
      * Llama al metodo filterAccountsByDivisa del EJB mediante la interfaz.
      *

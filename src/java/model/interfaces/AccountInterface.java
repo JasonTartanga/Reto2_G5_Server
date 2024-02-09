@@ -4,6 +4,7 @@ import exceptions.CreateException;
 import exceptions.DeleteException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
+import java.util.Date;
 import java.util.List;
 import model.entitys.Account;
 import model.enums.Divisa;
@@ -122,6 +123,17 @@ public interface AccountInterface {
     public List<Account> filterAccountsWithLowerBalance(Float balance, String mail) throws SelectException;
 
     /**
+     * Busca todos los Accounts que tengan un balance igual al especificado.
+     *
+     * @param balance el balance que queramos que sea igual.
+     * @param mail el identificador unico del usuario.
+     * @return todos los Account que tengan igual balance al espeficicado.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    public List<Account> filterAccountsWithEqualBalance(Float balance, String mail) throws SelectException;
+
+    /**
      * Busca todos los Accounts que tengan la misma divisa al especificado.
      *
      * @param divisa la divisa del Account que buscamos.
@@ -130,6 +142,13 @@ public interface AccountInterface {
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
+
+    public List<Account> filterAccountsWithDateAfter(Date date, String mail) throws SelectException;
+
+    public List<Account> filterAccountsWithDateEquals(Date date, String mail) throws SelectException;
+
+    public List<Account> filterAccountsWithDateBefore(Date date, String mail) throws SelectException;
+
     public List<Account> filterAccountsByDivisa(Divisa divisa, String mail) throws SelectException;
 
     /**
