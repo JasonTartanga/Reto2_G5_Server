@@ -33,6 +33,7 @@ public class PunctualEJB implements PunctualInterface {
     @Override
     public void createPunctual(Punctual punctual) throws CreateException {
         try {
+            punctual.setUuid(null);
             em.persist(punctual);
         } catch (Exception e) {
             throw new CreateException(e.getMessage());

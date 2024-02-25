@@ -71,8 +71,10 @@ public class AccountEJB implements AccountInterface {
     @Override
     public void deleteAccount(Account account) throws DeleteException {
         try {
-            for (Expense r : account.getExpenses()) {
-                em.remove(em.merge(r));
+            if (account.getExpenses() != null) {
+                for (Expense r : account.getExpenses()) {
+                    em.remove(em.merge(r));
+                }
             }
 
             em.remove(em.merge(account));
@@ -95,7 +97,7 @@ public class AccountEJB implements AccountInterface {
 
         try {
             a = em.find(Account.class,
-                     id);
+                    id);
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

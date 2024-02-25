@@ -8,7 +8,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.entitys.Account;
 import model.entitys.Shared;
 import model.interfaces.SharedInterface;
 
@@ -33,8 +32,6 @@ public class SharedEJB implements SharedInterface {
     @Override
     public void createShared(Shared shared) throws CreateException {
         try {
-            System.out.println("Creando el siguiente shared " + shared.toString());
-
             if (!em.contains(shared.getAccount())) {
                 shared.setAccount(em.merge(shared.getAccount()));
             }
@@ -96,8 +93,7 @@ public class SharedEJB implements SharedInterface {
     public Shared findShared(Long account_id, String mail) throws SelectException {
         Shared s = null;
         try {
-            s
-                    = (Shared) em.createNamedQuery("findShared").setParameter("id", account_id).setParameter("mail", mail).getSingleResult();
+            s = (Shared) em.createNamedQuery("findShared").setParameter("id", account_id).setParameter("mail", mail).getSingleResult();
 
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
@@ -118,6 +114,26 @@ public class SharedEJB implements SharedInterface {
         try {
             shareds
                     = em.createNamedQuery("findAllShared").getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return shareds;
+    }
+
+    /**
+     * Busca todos los Shared de un Account.
+     *
+     * @param id el identificador unico del Account.
+     * @return todos los Shared de un Account.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    @Override
+    public List<Shared> findAllSharedByAccount(Long id) throws SelectException {
+        List<Shared> shareds = null;
+        try {
+            shareds
+                    = em.createNamedQuery("findAllSharedByAccount").setParameter("id", id).getResultList();
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }

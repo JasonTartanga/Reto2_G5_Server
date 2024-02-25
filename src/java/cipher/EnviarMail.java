@@ -37,8 +37,6 @@ public class EnviarMail {
         String MAIL_EMISOR = parts[0];
         String MAIL_PASSWORD = parts[1];
 
-        System.out.println("Mail --> " + MAIL_EMISOR);
-        System.out.println("Passwd --> " + MAIL_PASSWORD);
         // protocol properties
         Properties props = System.getProperties();
         props.setProperty("mail.smtps.host", ZOHO_HOST); // change to GMAIL_HOST for gmail for gmail

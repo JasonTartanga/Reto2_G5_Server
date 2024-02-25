@@ -1,7 +1,7 @@
 package cipher;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.InvalidAlgorithmParameterException;
@@ -43,7 +43,6 @@ public class Simetric {
         //Descubre la ruta de documentos
         String credentials_path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "CashTracker" + File.separator + "credentials.dat";
 
-        System.out.println(credentials_path);
         // Fichero leído
         byte[] fileContent = fileReader(credentials_path);
         KeySpec keySpec = null;
@@ -76,9 +75,15 @@ public class Simetric {
      */
     private static byte[] fileReader(String path) {
         byte ret[] = null;
-        File file = new File(path);
         try {
-            ret = Files.readAllBytes(file.toPath());
+            try {
+                File file = new File(path);
+                ret = Files.readAllBytes(file.toPath());
+
+            } catch (FileNotFoundException e) {
+                File file = new File("src/java/cipher/credentials.dat");
+                ret = Files.readAllBytes(file.toPath());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

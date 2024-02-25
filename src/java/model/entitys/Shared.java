@@ -27,6 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     ,
     @NamedQuery(
             name = "findAllShared", query = "SELECT S FROM Shared S"
+    )
+    ,
+    @NamedQuery(
+            name = "findAllSharedByAccount", query = "SELECT S FROM Shared S WHERE S.account.id =:id"
     ),})
 @XmlRootElement
 public class Shared implements Serializable {

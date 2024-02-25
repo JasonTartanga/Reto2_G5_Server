@@ -1,16 +1,12 @@
 package model.ejb;
 
-import exceptions.CreateException;
-import exceptions.DeleteException;
 import exceptions.SelectException;
-import exceptions.UpdateException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.entitys.Expense;
-import model.entitys.Recurrent;
 import model.interfaces.ExpenseInterface;
 
 /**
@@ -37,11 +33,31 @@ public class ExpenseEJB implements ExpenseInterface {
         Long countExpenses = null;
 
         try {
-            countExpenses = (Long) em.createNamedQuery("listAllExpenses").getSingleResult();
+            countExpenses = (Long) em.createNamedQuery("countExpenses").getSingleResult();
 
         } catch (Exception e) {
             throw new SelectException(e.getMessage());
         }
         return countExpenses;
+    }
+
+    /**
+     * Busca todos los Expenses que tenga un Account.
+     *
+     * @param id el identificador unico del Account
+     * @return todos los Expenses de un Account.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    @Override
+    public List<Expense> listAllExpensesByAccount(Long id) throws SelectException {
+        List<Expense> expenses = null;
+        try {
+            expenses
+                    = em.createNamedQuery("listAllExpensesByAccount").setParameter("id", id).getResultList();
+        } catch (Exception e) {
+            throw new SelectException(e.getMessage());
+        }
+        return expenses;
     }
 }

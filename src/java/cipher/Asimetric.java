@@ -32,7 +32,11 @@ public class Asimetric {
 
         try {
             // Cargamos la clave privada
-            fis = new FileInputStream(System.getProperty("user.home") + File.separator + "Documents\\CashTracker\\privateKey.der");
+            try {
+                fis = new FileInputStream(System.getProperty("user.home") + File.separator + "Documents\\CashTracker\\privateKey.der");
+            } catch (FileNotFoundException e) {
+                fis = new FileInputStream("src/cipher/privateKey.der");
+            }
             byte[] privateKeyBytes = new byte[fis.available()];
             fis.read(privateKeyBytes);
             fis.close();

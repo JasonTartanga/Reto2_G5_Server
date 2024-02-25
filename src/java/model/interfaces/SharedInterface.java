@@ -60,4 +60,14 @@ public interface SharedInterface {
      * entidades.
      */
     public List<Shared> findAllShared() throws SelectException;
+
+    /**
+     * Busca todos los Shared de un Account.
+     *
+     * @param id el identificador unico del Account.
+     * @return todos los Shared de un Account.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    public List<Shared> findAllSharedByAccount(Long id) throws SelectException;
 }

@@ -1,6 +1,8 @@
 package model.interfaces;
 
 import exceptions.SelectException;
+import java.util.List;
+import model.entitys.Expense;
 
 /**
  * Es la interfaz de la entidad Expense.
@@ -12,15 +14,19 @@ public interface ExpenseInterface {
     /**
      * Busca la cantidad de Expenses que hay.
      *
-     * @throws SelectException gestiona una excepcion a la hora de buscar
-     * entidades.
-     */
-    /**
-     * Busca todos los Expenses que tenga un Account.
-     *
-     * @return todos los Expenses de un Account.
+     * @return el id mas alto de los Expenses.
      * @throws SelectException gestiona una excepcion a la hora de buscar
      * entidades.
      */
     public Long countExpenses() throws SelectException;
+
+    /**
+     * Busca todos los Expenses que tenga un Account.
+     *
+     * @param id el identificador unico del Account
+     * @return todos los Expenses de un Account.
+     * @throws SelectException gestiona una excepcion a la hora de buscar
+     * entidades.
+     */
+    public List<Expense> listAllExpensesByAccount(Long id) throws SelectException;
 }

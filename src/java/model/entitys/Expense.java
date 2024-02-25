@@ -25,7 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Expense", schema = "CashTracker")
 @NamedQueries({
     @NamedQuery(
-            name = "listAllExpenses", query = "SELECT max(E.uuid) FROM Expense E"
+            name = "countExpenses", query = "SELECT max(E.uuid) FROM Expense E"
+    )
+    ,
+    @NamedQuery(
+            name = "listAllExpensesByAccount", query = "SELECT E FROM Expense E WHERE E.account.id =:id"
     ),})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @XmlRootElement
